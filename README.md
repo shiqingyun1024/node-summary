@@ -14,3 +14,10 @@ Node.js可以解析JS代码(没有浏览器安全级别的限制)提供很多系
 . ....
 
 ```
+### 2.2 文件的读写（File System）
+```
+const fs = require('fs')
+fs.readFile('./ajax.png', 'utf-8', (err, content)=>{
+    console.log(content);
+})
+```
