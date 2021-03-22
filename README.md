@@ -21,3 +21,25 @@ fs.readFile('./ajax.png', 'utf-8', (err, content)=>{
     console.log(content);
 })
 ```
+### 2.3 进程的管理（Process）
+```
+function main(argv){
+    console.log(argv)
+}
+main(process.argv.slice(2))
+
+运行
+node 2.3-process.js argv1 argv2
+```
+### 2.4 网络通信（HTTP/HTTPS）
+```
+const http = require("http")
+http.createServer((req,res)=>{
+    res.writeHead(200,{
+        "content-type":"text/plain"
+    })
+    res.write("hello nodejs")
+    res.end();
+}).listen(3000)
+```
+
