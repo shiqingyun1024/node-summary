@@ -42,4 +42,14 @@ http.createServer((req,res)=>{
     res.end();
 }).listen(3000)
 ```
-
+## 二、Node相关工具
+### 1、NVM：Node Version Manger
+#### 1.1 Mac安装nvm
+```
+https://github.com/nvm-sh/nvm/blob/master/README.md
+```
+#### 1.2 Windows安装nvm
+```
+nvm-windows
+nodist
+```
