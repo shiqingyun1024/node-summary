@@ -118,14 +118,39 @@ npm view underscore versions
 npm install underscore@1.4.4 --save-dev
 npm list | grep gulp
 <!-- 查看过期包 -->
-npm outdated  // ~2.0.0表示patch，^2.0.0表示minor  *表示xx最新版本
+npm outdated 
 npm list | grep gulp
+<!-- 版本更新 -->
 npm update
 ```
 #### node package versions（安装的包的版本说明）
 ```
 13.4.6（假设版本号）
 major（主版本号---大的更新）：13，  minor（次版本号---添加新功能或者做一些修改，这个建立在主版本号确定的情况下）：4，patch（补丁号---修复bug等  偶数是稳定的，奇数是测试版本）：6
+
+"dependencies":{
+   "jquery":"^2.0.0",
+   "underscore":"~1.12.0",
+   "vue-cli":"3.4.0",
+   "vue":"*"
+}
+有四种符号
+1、^ 表示只锁定主版本号，主版本号确定后，后面获取最新的版本
+以上面的jquery为例，主版本号2确定后，后面会获取在主版本号下最新的版本 2.2.4
+
+2、~表示锁定主版本号和次版本号，后面获取最新的版本
+以上面的underscore为例，主版本号1和次版本号12确定后，后面会获取在主次版本号下最新的版本 1.12.4
+
+3、没有任何符号表示版本锁死了，就是指定的这个版本。
+以上面的vue-cli为例，主版本号、次版本号、补丁号都确定了
+
+4、* 表示最新的版本
+
+总结：
+^ 锁定 major（主版本号）
+~ 锁定 minor（次版本号）
+空锁定 patch（补丁号）
+*表示最新的版本
 ```
 #### 2.7 清除缓存
 ```
