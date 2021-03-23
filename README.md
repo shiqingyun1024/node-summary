@@ -156,4 +156,11 @@ major（主版本号---大的更新）：13，  minor（次版本号---添加新
 ```
 npm cache clean --force
 ```
-
+#### 2.8 上传自己的包
+##### 2.8.1 编写模块
+```
+保存为index.js
+exports.sayHello = function(){
+    return 'Hello World'
+}
+```
