@@ -53,3 +53,53 @@ https://github.com/nvm-sh/nvm/blob/master/README.md
 nvm-windows
 nodist
 ```
+### 2、NPM：Node Package Manger
+#### 2.1 全局安装package
+```
+npm install forever --global (-g)
+forever
+npm uninstall forever --global
+forever
+```
+##### 全局安装包的目录
+```
+Mac
+/Users/felix/.nvm/versions/node/nvm各个版本/bin/
+
+windows
+c:\Users\你的用户名\AppData\Roaming\npm\node_modules
+```
+#### 2.2 本地安装package
+```
+cd ~/desktop
+mkdir gp-project
+cd gp-project
+npm install underscore
+npm list(ls)
+```
+#### 2.3 package.json初始化
+```
+pwd
+npm init -y
+ls
+cat package.json
+```
+#### 2.4 使用package.json
+```
+npm install underscore --save
+cat package.json
+npm install lodash --save-dev
+cat package.json
+rm -rf node_modules
+ls
+npm install
+npm uninstall underscore --save
+npm list | grep underscore
+cat package.json
+```
+#### 2.5 安装指定版本的包
+```
+pwd
+npm list
+npm info underscore
+```
