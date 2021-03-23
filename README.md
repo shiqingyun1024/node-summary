@@ -113,14 +113,22 @@ npm i --production
 #### 2.6 更新本地安装的包
 ```
 npm info underscore
-npm view underscore version
+<!-- 查看所有的版本 -->
+npm view underscore versions
 npm install underscore@1.4.4 --save-dev
 npm list | grep gulp
+<!-- 查看过期包 -->
 npm outdated  // ~2.0.0表示patch，^2.0.0表示minor  *表示xx最新版本
 npm list | grep gulp
 npm update
+```
+#### node package versions（安装的包的版本说明）
+```
+13.4.6（假设版本号）
+major（主版本号---大的更新）：13，  minor（次版本号---添加新功能或者做一些修改，这个建立在主版本号确定的情况下）：4，patch（补丁号---修复bug等  偶数是稳定的，奇数是测试版本）：6
 ```
 #### 2.7 清除缓存
 ```
 npm cache clean --force
 ```
+
