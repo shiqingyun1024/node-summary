@@ -102,4 +102,25 @@ cat package.json
 pwd
 npm list
 npm info underscore
+npm view underscore version
+npm install underscore@1.8.0
+npm list
+npm uninstall underscore
+npm list
+<!-- 只装生产环境的包 -->
+npm i --production
+```
+#### 2.6 更新本地安装的包
+```
+npm info underscore
+npm view underscore version
+npm install underscore@1.4.4 --save-dev
+npm list | grep gulp
+npm outdated  // ~2.0.0表示patch，^2.0.0表示minor  *表示xx最新版本
+npm list | grep gulp
+npm update
+```
+#### 2.7 清除缓存
+```
+npm cache clean --force
 ```
