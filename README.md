@@ -164,3 +164,58 @@ exports.sayHello = function(){
     return 'Hello World'
 }
 ```
+##### 2.8.2 初始化包描述文件
+npm init package.json
+```
+{
+    "name":"gp19-npm",
+    "version":"1.0.1",
+    "description":"gp19 self module",
+    "main":"index.js",
+    "scripts":{
+        "test":"make test",
+    },
+    repository:{
+       "type":"Git", 
+       "url":"git+https://github.com/lurongtao/gp19-npm.git"
+    },
+    "keywords":{
+        "demo"
+    }
+    
+}
+```
+##### 2.8.3 注册npm仓库账号
+```
+https://www.npmjs.com  上面的账号
+felix_lurt/qqmko09ijn
+npm adduser
+```
+##### 2.8.4 上传包
+```
+npm publish
+```
+坑：403 Forbidden
+```
+查看npm源： npm config get registry
+切换npm源方法一：npm config set registry http://registry.npmjs.org
+切换npm源方法二：nrm use npm
+```
+##### 2.8.5 安装包
+```
+npm install gp19-npm
+```
+##### 2.8.6 卸载包
+```
+查看当前项目引用了哪些包
+npm ls
+卸载包：
+npm unpublish --force
+```
+##### 2.8.7 使用引入包
+```
+var hello = require('gp19-npm')
+hello.sayHello();
+```
+
+
