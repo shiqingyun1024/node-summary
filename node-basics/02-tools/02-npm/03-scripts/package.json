@@ -1,0 +1,13 @@
+{
+  "name": "03-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "runjs":"node script1.js && node script2.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
