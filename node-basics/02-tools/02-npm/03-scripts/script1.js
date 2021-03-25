@@ -7,4 +7,11 @@
 
 // "start":"node script3.js"
 // 可以直接 npm start 不用写run
+
 console.log('1');
+
+// 怎么能拿到package.json中定义的参数呢
+// npm_package_这个是固定的写法，后面跟参数名,一定要精准的获取变量,如果获取对象会报undefined
+// 前面一定要加process.env进程
+console.log(process.env.npm_package_config_env);
+// console.log(process.env.npm_package_config); // undefined
