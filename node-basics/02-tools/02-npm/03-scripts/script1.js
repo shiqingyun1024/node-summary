@@ -4,4 +4,7 @@
 
 // "runjs":"node script1.js && node script2.js"
 // 串行执行，先执行script1.js 再执行script2.js
+
+// "start":"node script3.js"
+// 可以直接 npm start 不用写run
 console.log('1');
