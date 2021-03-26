@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "runjs":"node script1.js && node script2.js",
     "start":"node script3.js",
-    "test":"node script4.js"
+    "test":"node script4.js",
+    "build":"echo $npm_package_config_env"
   },
   "keywords": [],
   "author": "",

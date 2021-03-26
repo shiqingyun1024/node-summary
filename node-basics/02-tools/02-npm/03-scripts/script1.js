@@ -8,6 +8,9 @@
 // "start":"node script3.js"
 // 可以直接 npm start 不用写run
 
+// "build":"echo $npm_package_config_env"
+// 可以在package.json里面访问里面的属性    echo命令是linux中最基础的命令，也是很常用的命令，echo命令后面跟上要输出的文本
+
 console.log('1');
 
 // 怎么能拿到package.json中定义的参数呢
