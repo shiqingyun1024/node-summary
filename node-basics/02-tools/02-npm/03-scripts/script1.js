@@ -11,6 +11,9 @@
 // "build":"echo $npm_package_config_env"
 // 可以在package.json里面访问里面的属性    echo命令是linux中最基础的命令，也是很常用的命令，echo命令后面跟上要输出的文本
 
+// "install":"git+https://git@gogs.pms.anyi-tech.com/anyi-front/anyi-ui.git#1.2.37"
+// 直接安装git地址上的包
+
 console.log('1');
 
 // 怎么能拿到package.json中定义的参数呢

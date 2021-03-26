@@ -8,7 +8,9 @@
     "runjs":"node script1.js && node script2.js",
     "start":"node script3.js",
     "test":"node script4.js",
-    "build":"echo $npm_package_config_env"
+    "build":"echo $npm_package_config_env",
+    "install":"git+https://git@gogs.pms.anyi-tech.com/anyi-front/anyi-ui.git#1.2.37"
+
   },
   "keywords": [],
   "author": "",
