@@ -217,5 +217,73 @@ npm unpublish --force
 var hello = require('gp19-npm')
 hello.sayHello();
 ```
+#### 2.10 npm 安装git上发布的包
+```
+# 这样适合安装公司内部的git服务器上的项目
+npm install git+https://git@github.com:lurongtao/gp-project.git
+
+#或者以ssh的方式
+npm install git+ssh://git@github.com:lurongtao/gp-project.git
+
+在项目中一般这样用：
+"devDependencies": {
+    "@anyi/anyi-ui": "git+http://downloader:downloader@gogs.pms.anyi-tech.com/anyi-front/anyi-ui.git#1.2.37",
+    ........
+    ........
+}  
+```
+#### 2.11 cross-env使用
+##### 2.11.1 cross-env是什么？
+```
+运行跨平台设置和使用环境变量的脚本
+```
+##### 2.11.2、为什么需要cross-env?
+```
+我们在自定义配置环境变量的时候，由于在不同的环境下，配置方式也是不同的。例如在window和linux下配置环境变量。
+2.1、在window下配置
+#node中常用的到的环境变量是NODE_ENV，首先查看是否存在 
+set NODE_ENV 
+
+#如果不存在则添加环境变量 
+set NODE_ENV=production 
+
+#环境变量追加值 set 变量名=%变量名%;变量内容 
+set path=%path%;C:\web;C:\Tools 
+
+#某些时候需要删除环境变量 
+set NODE_ENV=
+
+2.2、在linux下配置
+#node中常用的到的环境变量是NODE_ENV，首先查看是否存在
+echo $NODE_ENV
+
+#如果不存在则添加环境变量
+export NODE_ENV=production
+
+#环境变量追加值
+export path=$path:/home/download:/usr/local/
+
+#某些时候需要删除环境变量
+unset NODE_ENV
+
+#某些时候需要显示所有的环境变量
+env
+```
+##### 2.11.3、cross-env的作用是什么？
+```
+当我们使用 NODE_ENV = production 来设置环境变量的时候，大多数windows命令会提示将会阻塞或者异常，或者，windows不支持NODE_ENV=development的这样的设置方式，会报错。因此 cross-env 出现了。我们就可以使用 cross-env命令，这样我们就不必担心平台设置或使用环境变量了。也就是说 cross-env 能够提供一个设置环境变量的scripts，这样我们就能够以unix方式设置环境变量，然而在windows上也能够兼容的。
+```
+##### 2.11.4、如何在项目中使用cross-env?
+```
+npm install --save-dev cross-env
+
+然后在package.json中的scripts命令如下如下：
+"scripts": {
+  "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --colors --devtool cheap-module-eval-source-map --hot --inline",
+  "build": "cross-env NODE_ENV=production webpack --progress --colors --devtool cheap-module-source-map",
+}
+```
+
+
 
 
