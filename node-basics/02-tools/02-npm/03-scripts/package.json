@@ -4,18 +4,20 @@
   "description": "",
   "main": "script1.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "runjs":"node script1.js && node script2.js",
-    "start":"node script3.js",
-    "test":"node script4.js",
-    "build":"echo $npm_package_config_env",
-    "install":"git+https://git@gogs.pms.anyi-tech.com/anyi-front/anyi-ui.git#1.2.37"
-
+    "test": "node script4.js",
+    "runjs": "node script1.js && node script2.js",
+    "start": "node script3.js",
+    "build": "echo $npm_package_config_env",
+    "install": "git+https://git@gogs.pms.anyi-tech.com/anyi-front/anyi-ui.git#1.2.37",
+    "build:test": "cross-env NODE_ENV=production node anyiprod.js test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "config":{
-    "env":"production"
+  "config": {
+    "env": "production"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

@@ -14,6 +14,9 @@
 // "install":"git+https://git@gogs.pms.anyi-tech.com/anyi-front/anyi-ui.git#1.2.37"
 // 直接安装git地址上的包
 
+// "build:test": "cross-env NODE_ENV=production node anyiprod.js test",
+// 我们在文件中可以通过 process.env.NODE_ENV 来获取到
+
 console.log('1');
 
 // 怎么能拿到package.json中定义的参数呢
