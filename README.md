@@ -283,7 +283,21 @@ npm install --save-dev cross-env
   "build": "cross-env NODE_ENV=production webpack --progress --colors --devtool cheap-module-source-map",
 }
 ```
-
+### 3、NRM：node registry manger
+#### 3.1手工切换源
+##### 3.1.1查看当前源
+```
+npm config get registry
+```
+##### 3.1.2切换淘宝源
+```
+npm config set registry https://registry.npm.taobao.org
+```
+#### 3.2NRM管理源
+```
+NRM(npm registry manager)是npm的镜像源管理工具，有时候国外资源太慢，使用这个就可以快速地在npm源间切换。
+```
+##### 3.2.1安装nrm
 
 
 
