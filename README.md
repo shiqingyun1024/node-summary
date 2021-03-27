@@ -411,6 +411,33 @@ npx github:piuccio/cowsay hello
 
 注意，远程代码必须是一个模块，即必须包含package.json和入口脚本。
 ```
+## 三、模块/包与CommonJs
+### 1、模块/包分类
+```
+Node.js 有三类模块，即内置的模块、第三方的模块、自定义的模块。
+```
+### 1.1、内置的模块
+```
+Node.js内置模块又叫核心模块，Node.js安装完成可直接使用。如：
+const path = require('path')
+var extname = path.extname('index.html')
+console.log(extname)
+```
+### 1.2、第三方的Node.js模块
+```
+第三方的Node.js模块指的是为了实现某些功能，发布的npmjs.org上的模块，按照一定的开源协议供社群使用。如：
+npm install chalk
+
+const chalk = require('chalk')
+console.log(chalk.blue('hello world'))
+```
+### 1.3、自定义的Node.js模块
+```
+自定义的Node.js模块，也叫文件模块，是我们自己写的供自己使用的模块。同时，这类模块发布到npmjs.org上就成了开源的第三方模块。
+
+自定义模块是在运行时动态加载，需要完整的路径分析、文件定位、编译执行过程、速度相比核心模块稍微慢一些，但是用的非常多。
+```
+
 
 
 
