@@ -451,6 +451,37 @@ const sayName = ()=>{
 ```
 这里介绍几个常用的内置模块：url，querystring，http，events，fs，stream，readline，crypto，zlib
 ```
+### 1、url
+#### 1.1、parse
+```
+url.parse(urlString[,parseQueryString[,slashesDenoteHost]])
+const url = require('url')
+const urlString = 'https://www.baidu.com:443/ad/index.html?id=8&name=mouse#tag=110'
+const parseStr = url.parse(urlString)
+console.log(parseStr)
+```
+#### 1.2、format
+```
+url.format(urlObject)
+
+const url = require('url')
+const urlObject = {
+    protocol:'https',
+    slashes:true,
+    auth:null,
+    host:'www.baidu.com:443',
+    port:'443',
+    hostname:'www.baidu.com',
+    hash:'#tag=110',
+    search:'?id=8&name=mouse',
+    query:{id:'8',name:'mouse'},
+    pathname:'/ad/index.html',
+    path:'/ad/index.html?id=8&name=mouse',
+    href:'https://www.baidu.com:443/ad/index.html?id=8&name=mouse#tag=110'
+}
+url.format(urlObject)
+```
+
 
 
 
