@@ -284,20 +284,38 @@ npm install --save-dev cross-env
 }
 ```
 ### 3、NRM：node registry manger
-#### 3.1手工切换源
-##### 3.1.1查看当前源
+#### 3.1 手工切换源
+##### 3.1.1 查看当前源
 ```
 npm config get registry
 ```
-##### 3.1.2切换淘宝源
+##### 3.1.2 切换淘宝源
 ```
 npm config set registry https://registry.npm.taobao.org
 ```
-#### 3.2NRM管理源
+#### 3.2 NRM管理源
 ```
 NRM(npm registry manager)是npm的镜像源管理工具，有时候国外资源太慢，使用这个就可以快速地在npm源间切换。
 ```
-##### 3.2.1安装nrm
+##### 3.2.1 安装nrm
+```
+在命令行执行命令，npm install -g nrm 全局安装nrm
+```
+##### 3.2.2 使用nrm
+```
+执行命令nrm ls查看可选的源头。其中，带*的是当前使用的源，上面的输出表明当前源是官方源。
+```
+##### 3.2.3 切换nrm
+```
+如果要切换到taobao源，执行命令nrm use taobao。
+```
+##### 3.2.4 测试速度
+```
+你还可以通过nrm test测试相应源的响应时间
+nrm test
+```
+### 4、NPX：npm package extention
+
 
 
 
