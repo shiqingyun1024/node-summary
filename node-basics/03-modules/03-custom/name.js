@@ -14,6 +14,7 @@ module.exports = {
     name,
     age
 };
+// exports.name = name;
 
 
 // exports是module.exports的引用，module.exports和exports都有好多种用法，具体如下。
