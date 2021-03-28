@@ -15,6 +15,16 @@ module.exports = {
     age
 };
 
+
+// exports是module.exports的引用，module.exports和exports都有好多种用法，具体如下。
+
+// module.exports = name;
+// exports.name = name;
+// console.log(module);
+// console.log(module.exports);
+// console.log(exports===module.exports);
+// console.log(exports);
+
 // 也可以使用exports，使用exports的方式和原理如下：
 
 // 方式：
