@@ -447,6 +447,20 @@ const sayName = ()=>{
 
 }
 ```
+### 2、CommonJs
+### 2.1、module.exports与exports
+```
+js原先是没有模块化这个概念的，这使得JS很难像其他语言如java/python/php那样来编写模块化的应用程序。因此ES6以及NodeJS都对这方面特性做了增强。
+NodeJS为每个单独的JS文件生成了默认的Module对象，该对象用来表示文件执行上下文。
+
+通过Module.exports来定义该模块能输出的对象
+exports应该是module.exports的一个便捷写法的引用
+exports是module.exports的一个引用，exports指向的是module.exports
+两种方式不要混用
+module.exports和exports是导出，导入的时候使用require
+具体使用方式的区别请看node-basics/03-modules/03-custom/name.js
+```
+
 ## 四、内置模块
 ```
 这里介绍几个常用的内置模块：url，querystring，http，events，fs，stream，readline，crypto，zlib
@@ -454,14 +468,31 @@ const sayName = ()=>{
 ### 1、url
 #### 1.1、parse
 ```
+url.parse是把一个url链接解析成一个对象
 url.parse(urlString[,parseQueryString[,slashesDenoteHost]])
 const url = require('url')
 const urlString = 'https://www.baidu.com:443/ad/index.html?id=8&name=mouse#tag=110'
 const parseStr = url.parse(urlString)
 console.log(parseStr)
+<!-- 结果如下 -->
+cheese - Url {
+  protocol: 'https:',
+  slashes: true,
+  auth: null,
+  host: 'www.baidu.com:443',
+  port: '443',
+  hostname: 'www.baidu.com',
+  hash: '#tag=3',
+  search: '?id=2',
+  query: 'id=2',
+  pathname: '/path/index.html',
+  path: '/path/index.html?id=2',
+  href: 'https://www.baidu.com:443/path/index.html?id=2#tag=3'
+}
 ```
 #### 1.2、format
 ```
+url.format正好相反，把一个对象解析成一个url字符串
 url.format(urlObject)
 
 const url = require('url')
@@ -479,7 +510,10 @@ const urlObject = {
     path:'/ad/index.html?id=8&name=mouse',
     href:'https://www.baidu.com:443/ad/index.html?id=8&name=mouse#tag=110'
 }
-url.format(urlObject)
+const parseObj = url.format(urlObject);
+console.log(parseObj);
+<!-- 打印结果 -->
+https://www.baidu.com:443/path/index.html?id=2#tag=3
 ```
 
 
