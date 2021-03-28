@@ -552,6 +552,10 @@ const server = http.createServer((request,response)=>{
    })
 })
 ```
+#### 3.2、post
+```
+```
+
 
 
 
