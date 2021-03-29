@@ -1,6 +1,18 @@
 # node-summary
 node相关的总结
 
+## node的浏览器端调试
+```
+node --inspect --inspect-brk server.js
+```
+## node进程管理工具
+```
+- supervisor 
+- nodemon // 本地常用
+- forever 
+- pm2
+```
+
 ## 一、Node.js是什么
 ```
 Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine
@@ -555,6 +567,7 @@ const server = http.createServer((request,response)=>{
 #### 3.2、post
 ```
 ```
+
 
 
 

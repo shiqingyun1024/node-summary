@@ -5,7 +5,11 @@ const http = require('http')
 const server = http.createServer((request,response)=>{
     // logger.debug(request)
     // logger.debug(response)
-    response.write('home');
+    // 响应头部的编写，第一个参数是状态码，第二个是content-type,默认是text/html
+    response.writeHead(200,{
+        'content-type':'text/plain'
+    })
+    response.write('<div>home</div>');
     response.end();
 })
 server.listen(8080,()=>{
