@@ -2452,3 +2452,5 @@
 }
 [2021-03-29T22:16:56.371] [DEBUG] cheese - /app/list
 [2021-03-29T22:16:56.406] [DEBUG] cheese - /favicon.ico
+[2021-03-29T22:49:14.040] [DEBUG] cheese - name=123&age=12
+[2021-03-29T22:51:45.648] [DEBUG] cheese - name=123&age=12

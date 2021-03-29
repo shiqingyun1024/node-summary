@@ -1,10 +1,11 @@
 // 打印日志
 const logger = require('../../utils/log')
-const http = require('http')
+const http = require('http');
+const querystring = require('querystring');
 
 const server = http.createServer((request, response) => {
     let data = "";
-    request.on('data', () => {
+    request.on('data', (chunk) => {
         data += chunk;
     })
     request.on('end', () => {
@@ -12,7 +13,8 @@ const server = http.createServer((request, response) => {
         response.writeHead(200, {
             'content-type': 'text/plain'
         })
-        response.write('<div>home</div>');
+        logger.debug(data)
+        response.write(JSON.stringify(querystring.parse(data)));
         response.end();
     })
 
