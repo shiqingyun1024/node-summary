@@ -564,8 +564,34 @@ const server = http.createServer((request,response)=>{
    })
 })
 ```
-#### 3.2、post
+#### 3.2、post: 服务器提交（攻击）
 ```
+const https = require('https')
+const querystring = require('querystring')
+const postData = querystring.stringify({
+    province:'上海',
+    city:'上海',
+    district:'宝山区',
+    address:'同济支路199号',
+    latitude:43.0,
+    longitude:160.0,
+    message:'求购一条小鱼',
+    contact:'136666666',
+    type:'sell',
+    time:1571217561
+})
+
+const options = {
+    protocol:'https:',
+    hostname:'ik9hkddr.qcloud.la',
+    method:'POST',
+    port:443,
+    path:'/index.php/trade/add_item',
+    headers:{
+        'Content-Type':'application/x-www-form-urlencoded',
+        'Content-Length':Buffer.byteLength(postData)
+    }
+}
 ```
 
 
