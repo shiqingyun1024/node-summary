@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/data',(req,res,next)=>{
   logger.debug(req.body);
+  res.send('ok')
 })
 
 module.exports = router;
