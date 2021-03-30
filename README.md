@@ -592,8 +592,20 @@ const options = {
         'Content-Length':Buffer.byteLength(postData)
     }
 }
-```
 
+function doPost(){
+    let data
+    let req = https.request(options,res=>{
+        res.on('data',chunk=>data+=chunk)
+        res.on('end',()=>{
+            console.log(data)
+        })
+    })
+    req.write(postData)
+    req.end()
+}
+```
+#### 3.3、跨域: jsonp
 
 
 
