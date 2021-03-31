@@ -1,2 +1,26 @@
 [2021-03-30T21:58:55.936] [DEBUG] cheese - [Object: null prototype] { name: 'tongyi', age: '18' }
 [2021-03-30T22:01:50.306] [DEBUG] cheese - [Object: null prototype] { name: 'tongyi', age: '18' }
+[2021-03-30T23:15:36.216] [DEBUG] cheese - [Object: null prototype] {
+  province: '上海',
+  city: '上海',
+  district: '宝山区',
+  address: '同济支路199号',
+  latitude: '43',
+  longitude: '160',
+  message: '求购一条小鱼',
+  contact: '136666666',
+  type: 'sell',
+  time: '1571217561'
+}
+[2021-03-30T23:16:23.921] [DEBUG] cheese - [Object: null prototype] {
+  province: '上海',
+  city: '上海',
+  district: '宝山区',
+  address: '同济支路199号',
+  latitude: '43',
+  longitude: '160',
+  message: '求购一条小鱼',
+  contact: '136666666',
+  type: 'sell',
+  time: '1571217561'
+}

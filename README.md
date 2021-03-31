@@ -606,6 +606,42 @@ function doPost(){
 }
 ```
 #### 3.3、跨域: jsonp
+```
+const http = require('http')
+const url = require('url')
+
+const app = http.createServer((req,res)=>{
+    let urlObj = url.parse(req.url,true)
+    switch(urlObj.pathname){
+        case '/api/user':
+        res.end(`${urlObj.query.cb}({'name':"gp145"})`)
+        break
+    default:
+        res.end('404.')
+        break;    
+    }
+})
+app.listen(8080,()=>{
+    console.log('localhost:8080')
+})
+```
+#### 3.4、跨域: CORS
+```
+const http = require('http')
+const url = require('url')
+const querystring = require('querystring')
+
+const app = http.createServer((req,res)=>{
+    let data = ''
+    let urlObj = url.parse(req.url,true)
+    res.writeHead(200,{
+        'content-type':'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin':'*'
+    })
+
+})
+
+```
 
 
 
