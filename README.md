@@ -638,7 +638,68 @@ const app = http.createServer((req,res)=>{
         'content-type':'application/json;charset=utf-8',
         'Access-Control-Allow-Origin':'*'
     })
+    req.on('data',(chunk)=>{
+        data += chunk;
+    })
+    req.on('end',()=>{
+        responseResult(querystring.parse(data))
+    })
+    function responseResult(data){
+        switch(urlObj.pathname){
+            case '/api/login':
+               res.end(JSON.stringfy({
+                   message:data
+               }))
+               break
+            default:
+               res.end('404.')
+               break 
+        }
+    }
 
+})
+app.listen(8080,()=>{
+    console.log('localhost:8080')
+})
+
+```
+#### 3.5、跨域: middleware(http-proxy-middware)
+```
+const http = require('http')
+const proxy = require('http-proxy-middleware')
+
+http.createServer((req,res)=>{
+    let url = req.url
+    res.writeHead(200,{
+        'Access-Control-Allow-Origin':'*'
+    })
+    if(/^\/api/.test(url)){
+        let apiProxy = proxy('/api',{
+            target:'https://m.lagou.com',
+        })
+    }
+    req.on('data',(chunk)=>{
+        data += chunk;
+    })
+    req.on('end',()=>{
+        responseResult(querystring.parse(data))
+    })
+    function responseResult(data){
+        switch(urlObj.pathname){
+            case '/api/login':
+               res.end(JSON.stringfy({
+                   message:data
+               }))
+               break
+            default:
+               res.end('404.')
+               break 
+        }
+    }
+
+})
+app.listen(8080,()=>{
+    console.log('localhost:8080')
 })
 
 ```
