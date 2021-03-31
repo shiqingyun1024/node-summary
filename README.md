@@ -607,7 +607,7 @@ function doPost(){
 ```
 #### 3.3、跨域: jsonp
 ```
-利用浏览器请求js文件不受同源策略限制的机制，js、jpg、png、css等这些文件都不受同源策略的限制。
+利用浏览器请求js文件不受同源策略限制的机制，js、jpg、png、css等这些文件都不受同源策略的限制。 例如在script中的src引入的CDN链接，就是一种jsonp
 const http = require('http')
 const url = require('url')
 
