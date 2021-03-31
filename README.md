@@ -607,6 +607,7 @@ function doPost(){
 ```
 #### 3.3、跨域: jsonp
 ```
+利用浏览器请求js文件不受同源策略限制的机制，js、jpg、png、css等这些文件都不受同源策略的限制。
 const http = require('http')
 const url = require('url')
 
@@ -676,34 +677,52 @@ http.createServer((req,res)=>{
     if(/^\/api/.test(url)){
         let apiProxy = proxy('/api',{
             target:'https://m.lagou.com',
+            changeOrigin:true,
+            pathRewrite:{
+                '^/api':''
+            }
         })
-    }
-    req.on('data',(chunk)=>{
-        data += chunk;
-    })
-    req.on('end',()=>{
-        responseResult(querystring.parse(data))
-    })
-    function responseResult(data){
-        switch(urlObj.pathname){
-            case '/api/login':
-               res.end(JSON.stringfy({
-                   message:data
-               }))
+
+        <!-- http-proxy-middleware 在Node.js中使用的方法 -->
+        apiProxy(req,res)
+    }else{
+        switch(url){
+            case '/index.html':
+               res.end('index.html')
+               break
+            case '/search.html':
+               res.end('search.html')
                break
             default:
-               res.end('404.')
-               break 
+               res.end('[404]page not found')      
         }
     }
-
-})
-app.listen(8080,()=>{
-    console.log('localhost:8080')
-})
-
+}).listen(8080)
 ```
+#### 3.6、爬虫
+```
+const https = require('https')
+const http = require('http')
+const cheerio = require('cheerio')
 
+http.createServer((request,response)=>{
+    response.writeHead(200,{
+        'content-type':'application/json;charset=utf-8'
+    })
+
+    const options = {
+        protocol:'https:',
+        hostname:'manyan.com',
+        method:'GET',
+        port:443,
+        path:'/index.php/trade/add_item',
+        headers:{
+           'Content-Type':'application/x-www-form-urlencoded',
+           'Content-Length':Buffer.byteLength(postData)
+        }
+    }
+})
+```
 
 
 
