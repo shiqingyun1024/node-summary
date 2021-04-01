@@ -634,6 +634,12 @@ app.listen(8080,()=>{
 ```
 #### 3.4、跨域: CORS
 ```
+最主要的是设置  'Access-Control-Allow-origin':'*'
+res.writeHead(200,{
+    'content-type':'application/json',
+    'Access-Control-Allow-origin':'*'
+})
+
 const http = require('http')
 const url = require('url')
 const querystring = require('querystring')

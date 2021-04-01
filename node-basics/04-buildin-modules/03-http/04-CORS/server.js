@@ -7,7 +7,8 @@ const server = http.createServer((req,res)=>{
     switch(urlObj.pathname){
         case'/api/data':
         res.writeHead(200,{
-            'content-type':'application/json'
+            'content-type':'application/json',
+            'Access-Control-Allow-origin':'*'
         })
            res.write(`{"ret":true,"data":"hello"}`)
            break;
