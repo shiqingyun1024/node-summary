@@ -6,7 +6,10 @@ const server = http.createServer((req,res)=>{
     let urlObj = url.parse(urlstr,true)
     switch(urlObj.pathname){
         case'/api/data':
-           res.write(`${urlObj.query.cd}("hello")`)
+        res.writeHead(200,{
+            'content-type':'application/json'
+        })
+           res.write(`{"ret":true,"data":"hello"}`)
            break;
         default:
             res.write('page not found.')      

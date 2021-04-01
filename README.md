@@ -608,6 +608,12 @@ function doPost(){
 #### 3.3、跨域: jsonp
 ```
 利用浏览器请求js文件不受同源策略限制的机制，js、jpg、png、css等这些文件都不受同源策略的限制。 例如在script中的src引入的CDN链接，就是一种jsonp
+前后端协商定义函数的名字和传入的参数，然后利用script中的src属性，例如：
+<script src="http://localhost:8080/api/data?cb=getData"></script>
+这样就请求了localhost:8080/api/data这个接口，参数是cb=getData，后端返回的是
+res.write(`${urlObj.query.cb}("hello")`)，这样返回之后就直接执行getData（）
+所以前后端定义好getData
+
 const http = require('http')
 const url = require('url')
 
