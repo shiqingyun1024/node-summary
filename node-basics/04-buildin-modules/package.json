@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "log4js": "^6.3.0"
+  },
+  "dependencies": {
+    "http-proxy-middleware": "^1.1.0"
   }
 }

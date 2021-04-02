@@ -634,7 +634,7 @@ app.listen(8080,()=>{
 ```
 #### 3.4、跨域: CORS
 ```
-最主要的是设置  'Access-Control-Allow-origin':'*'
+在后端 最主要的是设置  'Access-Control-Allow-origin':'*'
 res.writeHead(200,{
     'content-type':'application/json',
     'Access-Control-Allow-origin':'*'
@@ -678,6 +678,8 @@ app.listen(8080,()=>{
 ```
 #### 3.5、跨域: middleware(http-proxy-middware)
 ```
+如何设置代理去访问相关的接口
+
 const http = require('http')
 const proxy = require('http-proxy-middleware')
 
