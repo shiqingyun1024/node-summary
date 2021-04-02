@@ -18,6 +18,7 @@ const server = http.createServer((req,res)=>{
         const proxy2 = createProxyMiddleware('/lagou',{
             target:'https://m.lagou.com',
             changeOrigin:true,
+            // 重写请求路径，本地请求的时候带有/lagou，但是在后端代理切换源后，请求的地址里面是没有/lagou，所以需要重写，把/lagou设置为空字符串。
             pathRewrite:{
                 '^/lagou':''
             }
