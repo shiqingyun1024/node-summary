@@ -14,6 +14,18 @@ const server = http.createServer((req,res)=>{
         proxy(req,res)
         // 前端请求的是 https://localhost:8080/api/...
         // 后端进行代理设置，切换源。后端请求的地址是：https://mar.vip.com/api/...
+    }else if(/\/lagou/.test(urlstr)){
+        const proxy2 = createProxyMiddleware('/lagou',{
+            target:'https://m.lagou.com',
+            changeOrigin:true,
+            pathRewrite:{
+                '^/lagou':''
+            }
+
+        })
+        // https://m.lagou.com/listmore.json?pageNo=2&pageSize=15
+        proxy2(req,res)
+
     }else{
         console.log('error');
     }
