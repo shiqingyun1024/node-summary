@@ -679,7 +679,7 @@ app.listen(8080,()=>{
 #### 3.5、跨域: middleware(http-proxy-middware)
 ```
 如何设置代理去访问相关的接口
-
+代理的含义是前端请求接口，在后端接到请求之后，把前面的域名部分替换成想要请求的服务器域名（服务器之间是不存在跨域的），然后后端发出请求，把请求回来的结果再传给前端。这样就解决了跨域的问题。
 const http = require('http')
 const proxy = require('http-proxy-middleware')
 
@@ -729,13 +729,29 @@ http.createServer((request,response)=>{
         hostname:'manyan.com',
         method:'GET',
         port:443,
-        path:'/index.php/trade/add_item',
-        headers:{
-           'Content-Type':'application/x-www-form-urlencoded',
-           'Content-Length':Buffer.byteLength(postData)
-        }
+        path:'/',
     }
+
+    const req = https.request(options,(res)=>{
+        let data = ''
+        res.on('data',(chunk)=>{
+            data += chunk;
+        })
+
+        res.on('end',()=>{
+            filterData(data)
+        })
+    })
 })
+
+function filterData(data){
+    let $ = cheerio.load(data)
+    let $movieList = $('.movie-item')
+    let movies = []
+    $movieList.each((index,value)=>{
+
+    })
+}
 ```
 
 
