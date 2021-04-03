@@ -795,6 +795,102 @@ fs.writeFile(
         }
     }
 )
+
+<!-- 读取文件内容 -->
+fs.readFile('./log/log1.txt','utf-8',(err,data)=>{
+    console.log('读取文件')
+})
+
+<!-- 删除文件 -->
+fs.unlink('./log/log1.txt',(err)=>{
+    console.log('删除文件')
+})
+
+<!-- 批量写文件 -->
+for(var i = 0; i < 10; i++){
+    fs.writeFile(`./logs/log-${i}.txt`,`文件内容为${i}`,(err)=>{
+        console.log('批量写入文件')
+    })
+}
+
+<!-- 读取文件/目录信息 -->
+fs.readdir('./',(err,data)=>{
+    data.forEach((value,index)=>{
+        fs.stat(`./${value}`,(err,stats)=>{
+            console.log(value+'is'+(stats.isDirectory()?'directory':'file'))
+        })
+
+    })
+})
+
+// 批量读取文件的内容,  递归调用
+function readDir(dir){
+    fs.readdir(dir,(err,content)=>{
+        content.forEach((value,index)=>{
+            let joinDir = `${dir}/${value}`
+            fs.stat(joinDir,(err,stats)=>{
+                // stats.isDirectory用来判断是否是文件夹
+                if(stats.isDirectory()){
+                    readDir(joinDir)
+                }else{
+                    fs.readFile(joinDir,'utf-8',(err,content)=>{
+                        console.log(content);
+                    })
+                }
+            })
+        })
+    })
+
+}
+readDir('./')
+
+<!-- 同步读取文件 -->
+try{
+    const content = fs.readFileSync('./logs/log-1.txt','utf-8')
+    console.log(content)
+    console.log(0)
+}catch(e){
+    console.log(e.message)
+}
+console.log(1)
+
+<!-- 异步读取文件： 方法一 -->
+fs.readFile('./logs/log-0.txt','utf-8',(err,content)=>{
+    console.log(content)
+    console.log(0)
+})
+
+<!-- 异步读取文件： 方法二 -->
+fs.readFile('./logs/log-0.txt','utf-8').then(result=>{
+    console.log(result)
+})
+
+<!-- 异步读取文件： 方法三 -->
+function getFile(){
+    return new Promise((resolve)=>{
+        fs.readFile('./logs/log-0.txt','utf-8',(err,data)=>{
+            resolve(data)
+        })
+    })
+}
+;(async ()=>{
+    console.log(await getFile())
+})()
+
+<!-- 异步读取文件：方法四 -->
+const fsP = require('fs').promises;
+const fsp = fsP.readFile('./logs/log1.txt','utf-8').then((result)=>{
+  console.log(result)
+})
+console.log(fsP)
+
+// watch 监测文件变化
+fs.watch('./logs/log-0.txt',()=>{
+    console.log(0)
+})
+
+
+
 ```
 
 
