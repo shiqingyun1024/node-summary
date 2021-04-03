@@ -776,6 +776,25 @@ fs.mkdir('./logs',(err)=>{
 fs.rename('./logs','./log',()=>{
     console.log('done.')
 })
+
+<!-- 删除文件夹 -->
+fs.rmdir('./log',()=>{
+    console.log('done.')
+})
+
+<!-- 写内容到文件里 -->
+fs.writeFile(
+    './logs/log1.txt',
+    'hello',
+    <!-- 错误优先的回调函数 -->
+    (err)=>{
+        if(err){
+            console.log(err.message)
+        }else{
+            console.log('文件创建成功')
+        }
+    }
+)
 ```
 
 
