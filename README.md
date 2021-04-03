@@ -715,43 +715,39 @@ http.createServer((req,res)=>{
 ```
 #### 3.6、爬虫
 ```
-const https = require('https')
+现获取网页的html结构，然后使用cheerio把DOM解析成虚拟DOM结构，然后再进行操作，cheerio操作虚拟DOM类似于jquery，具体操作案例如下：
+
+// 蜘蛛 爬虫
 const http = require('http')
+const https = require('https')
 const cheerio = require('cheerio')
+const url = require('url')
 
-http.createServer((request,response)=>{
-    response.writeHead(200,{
-        'content-type':'application/json;charset=utf-8'
+function filterData(data) {
+    const $ = cheerio.load(data);
+    $('.section-title').each((index,el)=>{
+        // console.log(index);
+        console.log($(el).text());
     })
+    // console.log(data);
+}
 
-    const options = {
-        protocol:'https:',
-        hostname:'manyan.com',
-        method:'GET',
-        port:443,
-        path:'/',
-    }
-
-    const req = https.request(options,(res)=>{
-        let data = ''
-        res.on('data',(chunk)=>{
-            data += chunk;
+const server = http.createServer((req, res) => {
+    let data = ''
+    https.get('https://www.meizu.com', (result) => {
+        result.on('data', (chunk) => {
+            data += chunk
         })
-
-        res.on('end',()=>{
+        result.on('end', () => {
             filterData(data)
         })
     })
+
+})
+server.listen(8080, () => {
+    console.log('localhost:8080');
 })
 
-function filterData(data){
-    let $ = cheerio.load(data)
-    let $movieList = $('.movie-item')
-    let movies = []
-    $movieList.each((index,value)=>{
-
-    })
-}
 ```
 
 

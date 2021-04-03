@@ -6,7 +6,11 @@ const url = require('url')
 
 function filterData(data) {
     const $ = cheerio.load(data);
-    console.log(data);
+    $('.section-title').each((index,el)=>{
+        // console.log(index);
+        console.log($(el).text());
+    })
+    // console.log(data);
 }
 
 const server = http.createServer((req, res) => {
