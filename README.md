@@ -715,7 +715,7 @@ http.createServer((req,res)=>{
 ```
 #### 3.6、爬虫
 ```
-现获取网页的html结构，然后使用cheerio把DOM解析成虚拟DOM结构，然后再进行操作，cheerio操作虚拟DOM类似于jquery，具体操作案例如下：
+现获取网页的html结构，然后使用cheerio把DOM解析成虚拟DOM结构，然后再进行操作，cheerio操作虚拟DOM类似于jquery，操作虚拟DOM的过程也叫数据筛洗。具体操作案例如下：
 
 // 蜘蛛 爬虫
 const http = require('http')
@@ -748,6 +748,34 @@ server.listen(8080, () => {
     console.log('localhost:8080');
 })
 
+```
+### 4、Events
+```
+操作事件，例如 绑定事件，触发事件
+const EventEmitter = require('events')
+class MyEventEmitter extends EventEmitter{}
+const event = new MyEventEmitter()
+<!-- 绑定事件 -->
+event.on('play',(movie)=>{
+    console.log(movie)
+})
+<!-- 触发事件，并且传入参数 -->
+event.emit('play','我和我的祖国')
+```
+### 5、File System
+```
+const fs = require('fs')
+const fsP = require('fs').promises
+
+<!-- 创建文件夹 -->
+fs.mkdir('./logs',(err)=>{
+    console.log('done.')
+})
+
+<!-- 文件夹改名 -->
+fs.rename('./logs','./log',()=>{
+    console.log('done.')
+})
 ```
 
 
