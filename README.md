@@ -888,10 +888,30 @@ console.log(fsP)
 fs.watch('./logs/log-0.txt',()=>{
     console.log(0)
 })
-
-
-
 ```
+### 6、Stream
+```
+const fs = require('fs')
+
+const readstream = fs.createReadStream('./note.txt')
+const writestream = fs.createWriteStream('./note2.txt')
+
+writestream.write(readstream)
+```
+### 7、Zlib
+```
+const fs = require('fs')
+const zlib = require('zlib')
+
+const gzip = zlib.createGzip()
+const readstream = fs.createReadStream('./note.txt')
+const writestream = fs.createWriteStream('./note2.txt')
+
+readstream.pipe(gzip).pipe(writestream)
+
+writestream.write(readstream)
+```
+### 8、ReadLine
 
 
 
