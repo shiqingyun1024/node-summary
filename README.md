@@ -950,9 +950,34 @@ http.createServer((req,res)=>{
     switch(req.url){
         case '/home':
           res.write('home')
+          res.end()
+          break
+        case '/mine':
+          res.write('mine')
+          res.end()
+          break
+        case '/login':
+          res.readFile('./static/login.html',(error,data)=>{
+              if(error) throw error
+              res.write(data)
+              res.end()
+          })
+          break
+        case '/fulian.jpg':
+          res.readFile('./static/fulian.jpg','binary',(error,data)=>{
+              if(error) throw error
+              res.write(data,'binary')
+              res.end()
+          })
+          break
+        default:
+          break      
     }
+}).listen(8000,'localhsot',()=>{
+    console.log('服务器运行在：http://localhost:8000')
 })
 ```
+## 六、静态资源服务
 
 
 
