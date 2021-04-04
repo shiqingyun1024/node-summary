@@ -978,7 +978,7 @@ http.createServer((req,res)=>{
 })
 ```
 ## 六、静态资源服务
-### 1.1 readStaticFile
+### 1 readStaticFile
 /modules/readStaticFile.js
 ```
 // 引入依赖的模块
@@ -1013,7 +1013,31 @@ function readStaticFile(res,filePathname){
     }
 }
 ```
+### 2 server
+/server.js
+```
+// 引入相关的模块
+var http = require('http')
+var path = require('path')
+var fs = require('fs')
+var readStaticFile = require('./modules/readStaticFile')
 
+// 搭建 HTTP 服务器
+var server = http.createServer((req,res)=>{
+    var urlObj = url.parse(req.url)
+    var urlPathname = urlObj.pathname;
+    var filePathname = path.join(__dirname,"/public",urlPathname);
+
+    // 读取静态文件
+    readStaticFile(res,filePathname);
+})
+
+// 在3000 端口监听请求
+server.listen(3000,()=>{
+    console.log("服务器运行中");
+    console.log("正在监听 3000 端口");
+})
+```
 
 
 
