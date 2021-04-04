@@ -905,13 +905,28 @@ const zlib = require('zlib')
 
 const gzip = zlib.createGzip()
 const readstream = fs.createReadStream('./note.txt')
-const writestream = fs.createWriteStream('./note2.txt')
+const writestream = fs.createWriteStream('./note.gzip')
 
 readstream.pipe(gzip).pipe(writestream)
 
 writestream.write(readstream)
 ```
 ### 8、ReadLine
+```
+const readline = require('readline')
+
+const rl = readline.createInterface({
+    input:process.stdin,
+    output:process.stdout
+})
+
+rl.question('What do you think of Node.js?',(answer)=>{
+    <!-- TODO:Log the answer in a database -->
+    console.log('Thank you for your valuable feedback:${answer}')
+
+    rl.close()
+})
+```
 
 
 
