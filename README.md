@@ -891,6 +891,8 @@ fs.watch('./logs/log-0.txt',()=>{
 ```
 ### 6、Stream
 ```
+文件流
+流是Node.js中处理流数据的抽象接口。stream模块提供了一个用于实现stream接口的API。
 const fs = require('fs')
 
 const readstream = fs.createReadStream('./note.txt')
@@ -900,6 +902,7 @@ writestream.write(readstream)
 ```
 ### 7、Zlib
 ```
+压缩文件
 const fs = require('fs')
 const zlib = require('zlib')
 
@@ -913,6 +916,7 @@ writestream.write(readstream)
 ```
 ### 8、ReadLine
 ```
+eadline模块提供了一个从可读流(比如process.stdin)逐行读取数据的接口。它可以通过以下方式访问:
 const readline = require('readline')
 
 const rl = readline.createInterface({
@@ -925,6 +929,28 @@ rl.question('What do you think of Node.js?',(answer)=>{
     console.log('Thank you for your valuable feedback:${answer}')
 
     rl.close()
+})
+```
+### 9、Crypto
+```
+加密的操作
+const crypto = require('crypto')
+const secret = 'abcdefg'
+const hash = crypto.createHeac('sha256',secret)
+                   .update('I love you')
+                   .digest('hex')
+console.log(hash)                   
+```
+## 五、路由
+```
+var http = require('http')
+var fs = require('fs')
+
+http.createServer((req,res)=>{
+    switch(req.url){
+        case '/home':
+          res.write('home')
+    }
 })
 ```
 
