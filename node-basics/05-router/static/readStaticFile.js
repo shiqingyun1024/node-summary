@@ -18,7 +18,7 @@ function myReadFile(file){
 
 async function readStaticFile(filePathName){
     let ext = path.parse(filePathName).ext
-    let mimeType = mime.getType(ext)
+    let mimeType = mime.getType(ext) || 'text/html'
     // console.log(ext);
     let data
     // 判断文件是否存在
@@ -31,6 +31,7 @@ async function readStaticFile(filePathName){
             data = await myReadFile(path.join(filePathName,'./index.html'))
         }
     }else{
+        console.log(0)
        data =  "文件没找到"
     }
 
