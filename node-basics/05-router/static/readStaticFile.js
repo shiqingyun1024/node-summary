@@ -3,30 +3,35 @@ const path = require('path');
 const mime = require('mime');
 const fs = require('fs')
 
-function myReadFile(file,res){
-    fs.readFile(file,(err,data)=>{
-        if(err){
-            res.end('error')
-        }
+function myReadFile(file){
+    return new Promise((resolve,reject)=>{
+        fs.readFile(file,(err,data)=>{
+            if(err){
+                resolve("你访问的是一个文件夹")
+            }else{
+                resolve(data)
+            }
+        })
     })
+    
 }
 
-function readStaticFile(filePathName){
-    let ext = mime.getType(path.parse(filePathName).ext)
+async function readStaticFile(filePathName){
+    let ext = path.parse(filePathName).ext
     let mimeType = mime.getType(ext)
-    console.log(ext);
+    // console.log(ext);
     let data
     // 判断文件是否存在
     if(fs.existsSync(filePathName)){
         // 如果存在ext，说明是文件，因为文件有后缀名。
         // 如果不存在ext，说明是文件夹，因为文件夹没有后缀名。
         if(ext){
-            data = myReadFile(filePathName)
+            data = await myReadFile(filePathName)
         }else{
-            data = myReadFile(path.join(filePathName,'./index.html'),res)
+            data = await myReadFile(path.join(filePathName,'./index.html'))
         }
     }else{
-        res.end('file not found')
+       data =  "文件没找到"
     }
 
     return {
