@@ -32,7 +32,7 @@ async function readStaticFile(filePathName){
         }
     }else{
         console.log(0)
-       data =  "文件没找到"
+        data =  "文件没找到"
     }
 
     return {

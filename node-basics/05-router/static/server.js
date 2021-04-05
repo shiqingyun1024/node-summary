@@ -5,6 +5,8 @@ http.createServer(async (req,res)=>{
     let urlstring = req.url;
     let filePathName = path.join(__dirname,'./public',urlstring)
     let {data,mimeType } = await readStaticFile(filePathName)
+
+    console.log(mimeType);
     console.log(1);
     console.log(data.toString());
     res.writeHead(200,{
