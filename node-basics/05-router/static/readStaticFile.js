@@ -3,18 +3,36 @@ const path = require('path');
 const mime = require('mime');
 const fs = require('fs')
 
+function myReadFile(file,res){
+    fs.readFile(file,(err,data)=>{
+        if(err){
+            res.end('error')
+        }
+    })
+}
+
 function readStaticFile(filePathName){
     let ext = mime.getType(path.parse(filePathName).ext)
+    let mimeType = mime.getType(ext)
     console.log(ext);
-
+    let data
     // 判断文件是否存在
     if(fs.existsSync(filePathName)){
-        console.log('文件存在');
+        // 如果存在ext，说明是文件，因为文件有后缀名。
+        // 如果不存在ext，说明是文件夹，因为文件夹没有后缀名。
+        if(ext){
+            data = myReadFile(filePathName)
+        }else{
+            data = myReadFile(path.join(filePathName,'./index.html'),res)
+        }
     }else{
-        console.log('文件不存在');
+        res.end('file not found')
     }
 
-    return 'hello'
+    return {
+        mimeType,
+        data
+    }
 }
 
 module.exports = readStaticFile
