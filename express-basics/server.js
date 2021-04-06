@@ -16,6 +16,11 @@ let middlewares = [(req,res,next)=>{
 // 中间件栈
 app.use('/',middlewares)
 
+app.use('/ajax',(req,res,next)=>{
+    console.log('ajax');
+    // next()
+})
+
 app.use('/api',(req,res)=>{
     res.end('world')
 })
