@@ -6,9 +6,12 @@ const router = require('./router/index')
 
 const bodyParser = require('body-parser')
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extend:false}))
+
 app.use('/',router)
 
-app.use(bodyParser.urlencoded({extend:false}))
+
 
 app.listen(8080,()=>{
     console.log('localhost:8080');
