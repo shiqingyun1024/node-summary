@@ -1182,6 +1182,16 @@ npm view express versions 查看express所有的版本
 mkdir myapp
 cd myapp
 ```
+## 二、模板
+express有哪些模板
+```
+express template
+-ejs
+-pu
+-jade
+-art-template
+
+```
 
 
 
