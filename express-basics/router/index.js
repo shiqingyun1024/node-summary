@@ -2,10 +2,9 @@ const express = require('express')
 
 // 路由中间件
 const router = express.Router()
+const {list} = require("../controller")
 
-router.get('/',(req,res,next)=>{
-    res.send('hello')
-})
+router.get('/',list)
 
 // 获取数据
 router.get('/index',(req,res,next)=>{
@@ -40,6 +39,11 @@ router.delete('/index',(req,res,next)=>{
     const data = req.body
     console.log(data);
     res.send('delete response')
+})
+
+// 上面所有的请求方式的通用的请求
+router.all('/index',(req,res,next)=>{
+    res.send('hello');
 })
 
 module.exports = router
