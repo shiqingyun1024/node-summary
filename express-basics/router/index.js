@@ -5,6 +5,7 @@ const router = express.Router()
 const {list} = require("../controller")
 
 router.get('/',list)
+router.get('/api/list',list)
 
 // 获取数据
 router.get('/index',(req,res,next)=>{
