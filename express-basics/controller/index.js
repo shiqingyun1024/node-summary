@@ -7,15 +7,27 @@ const list = (req,res,next)=>{
     // data += '</ul>'
 
     // 只返回数据
-    let data = {
-        ret:true,
-        data:[]
-    }
+    // let data = {
+    //     ret:true,
+    //     data:[]
+    // }
+    // for(var i = 0; i < 100; i++){
+    //     data.data.push(`line${i}`) 
+    // }
+
+    // res.send(data)
+
+
+    // 现在有了模板引擎，可以按照模板引擎的写法来
+    let dataArray = []
+
     for(var i = 0; i < 100; i++){
-        data.data.push(`line${i}`) 
+        dataArray.push('line' + i)
     }
 
-    res.send(data)
+    res.render('list',{
+        dataArray
+    })
 }
 
 exports.list = list
