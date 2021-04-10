@@ -18,8 +18,9 @@ app.use(express.static('public'))
 
 // view engine setup
 app.engine('art', require('express-art-template'));
-app.set('view', {
-    debug: process.env.NODE_ENV !== 'production'
+app.set('view options', { // 注意此处和官网不一样
+    debug: process.env.NODE_ENV !== 'production',
+    escape: false  // 是个坑，转化HTML5代码
 });
 app.set('views', path.join(__dirname, 'view'));
 app.set('view engine', 'art'); // 设置art结尾的文件为引擎模板
