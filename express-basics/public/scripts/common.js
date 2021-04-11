@@ -1,15 +1,14 @@
 $.ajax({
-    url:'/api/list',
-    success(result){
-        console.log(result);
-        let html = '<ul>'
-        $.each(result.data,(index,value)=>{
-            html+='<li>'+value+'</li>'
-        })
-        html +="</ul>"
-
-        template.compile('<div>{{data}}</div>',{data:100})
-        console.log(str());
+    url: '/api/list',
+    success(result) {
+        let templateStr = `
+          <ul>
+            {{each data}}
+               <li>{{$value}}</li>
+            {{/each}}
+          </ul>
+        `
+        let html = template.render(templateStr, {data:JSON.parse(result).data})
         $('#list').html(html)
     }
 })
