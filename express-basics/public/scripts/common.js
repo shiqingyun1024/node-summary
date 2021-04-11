@@ -7,6 +7,9 @@ $.ajax({
             html+='<li>'+value+'</li>'
         })
         html +="</ul>"
+
+        template.compile('<div>{{data}}</div>',{data:100})
+        console.log(str());
         $('#list').html(html)
     }
 })

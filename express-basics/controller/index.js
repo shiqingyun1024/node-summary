@@ -25,7 +25,7 @@ const list = (req,res,next)=>{
         dataArray.push('line' + i)
     }
 
-    res.set('content-type','appliction/json;charset=utf-8')
+    // res.set('content-type','appliction/json;charset=utf-8')
 
     res.render('list',{
         data:JSON.stringify(dataArray)
