@@ -2,6 +2,8 @@ var template = require('art-template');
 const path = require("path")
 const fs = require('fs')
 
+const {dataArray} = require('../model/list')
+
 
 const list = (req,res,next)=>{
     // 返回html页面，这个叫ssr（服务端渲染）
@@ -45,7 +47,7 @@ const list = (req,res,next)=>{
     var html = template(path.join(__dirname, '../view/list-html.art'), {
         data: dataArray
     });
-    fs.writeFile(path.join(__dirname, '../public/list.html'),html)
+    fs.writeFileSync(path.join(__dirname, '../public/list.html'),html)
     console.log(html);
 
     res.send("pages ok")
