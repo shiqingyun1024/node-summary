@@ -1344,6 +1344,7 @@ db.printCollectionStats();
 (1)添加
 db.users.save({name:'zhangsan',age:25,sex:true});
 (2)修改
+第一个参数表示条件，你要修改谁，第二个参数表示要修改成什么内容，第三个参数表示如果找不到就创建（true的情况会创建），第四个参数表示匹配所有的（如果有多个数据的name是一样的，都会更新数据里面的参数），
 db.users.update({age:25},{$set:{name:'changeName'}},false:true});
 // 相当于：update users set name = ’changeName‘ where age = 25;
 db.users.update({name:'Lisi'},{$inc:{age:50}},false:true});

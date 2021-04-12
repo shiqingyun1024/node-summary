@@ -1,11 +1,27 @@
-1、数据库的操作
+一、数据库的操作
 db //查询当前数据库
 show dbs // 查询所有的数据库
 use music// 创建/切换数据库
 db.dropDataBase() // 删除数据库
 
-2、集合的操作
+二、集合的操作
 db.createCollection("collName",{size:20,capped:true,max:100})//创建一个集合
 db.getCollection("account");// 得到指定名称的集合
 db.getCollectionNames(); //得到当前db的所有集合
 db.printCollectionStats();//显示当前db所有集合的状态
+
+三、文档操作
+1、插入数据
+db.huahua.insert([{name:'m1',release:'2020-12-05'}] // 插入数据（huahua是集合里面存在的集合，自己创建的）
+db.huahua.insert([{name:'m1',release:'2020-12-05'},{name:'m2',release:'2020-12-06'}])
+db.huahua.save([{name:'m3',release:'2020-12-05'},{name:'m4',release:'2020-12-06'}])
+db.huahua.save([{name:'m5',release:'2020-12-12',publishNum:100}])
+
+2、修改数据
+db.huahua.update({name:'m1'},{$set:{release:'2020-12-10'}})
+db.huahua.update({name:'m5'},{$inc:{publishNum:200}})
+db.huahua.update({name:'m5'},{$inc:{publishNum:200}},true)
+db.huahua.update({name:'m5'},{$inc:{publishNum:200}},true,true)
+
+5、查询数据
+db.huahua.find() // 查询数据
