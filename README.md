@@ -1303,6 +1303,31 @@ db.getMongo()
 （8）删除数据库
 db.dropDatabase()
 ```
+## 2、MongoDB的安装和使用流程
+### 2.1 安装数据库
+[安装教程](https://docs.mongodb.com/manual/)
+### 2.2 启动数据库
+```
+1、windows
+mongod --dbpath d:/data/db
+mongo
+
+2、mac
+mongod --config /usr/local/etc/mongod.conf
+mongo
+```
+### 2.3 数据库操作
+```
+use gp145
+db/db.getName()
+show dbs
+db.createCollection('movies')
+db.stats()
+db.version()
+db.getMongo() // connection to 127.0.0.1:27017
+db.dropDatabase()
+```
+### 2.4 集合操作
 
 
 
