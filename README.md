@@ -1327,8 +1327,32 @@ db.version()
 db.getMongo() // connection to 127.0.0.1:27017
 db.dropDatabase()
 ```
-### 2.4 集合操作
-
+### 2.4 Collection集合操作
+```
+(1)创建一个集合
+db.createCollection("collName",{size:20,capped:true,max:100});
+db.collName.isCapped(); // 判断集合是否为定容量
+(2)得到指定名称的集合
+db.getCollection("account");
+(3)得到当前db的所有集合
+db.getCollectionNames();
+(4)显示当前db所有集合的状态
+db.printCollectionStats();
+```
+### 2.5 添加、修改与删除集合数据
+```
+(1)添加
+db.users.save({name:'zhangsan',age:25,sex:true});
+(2)修改
+db.users.update({age:25},{$set:{name:'changeName'}},false:true});
+// 相当于：update users set name = ’changeName‘ where age = 25;
+db.users.update({name:'Lisi'},{$inc:{age:50}},false:true});
+// 相当于：update users set age = age + 50 where name = 'Lisi';
+db.users.update({name:'Lisi'},{$inc:{age:50},$set:{name:'hoho'}},false:true});
+// 相当于：update users set age = age + 50,name = 'hoho' where name = 'Lisi';
+(3)删除
+db.users.remove({age:132})
+```
 
 
 

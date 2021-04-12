@@ -1,0 +1,11 @@
+1、数据库的操作
+db //查询当前数据库
+show dbs // 查询所有的数据库
+use music// 创建/切换数据库
+db.dropDataBase() // 删除数据库
+
+2、集合的操作
+db.createCollection("collName",{size:20,capped:true,max:100})//创建一个集合
+db.getCollection("account");// 得到指定名称的集合
+db.getCollectionNames(); //得到当前db的所有集合
+db.printCollectionStats();//显示当前db所有集合的状态
