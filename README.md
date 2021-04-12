@@ -1203,14 +1203,14 @@ cms  内容管理系统
 
 
 # MongoDB
-## 一、MongoDB是什么
+## 1、MongoDB是什么
 ```
 MongoDB 是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。
 
 它的特点：高性能、易部署、易使用，存储数据非常方便。
 ```
 
-#### 1.1 下面是和mySQL的对比
+### 1.1 下面是和mySQL的对比
 SQL术语/概念|MongoDB术语/概念|解释/说明
 -|-|-
 database|database|数据库
@@ -1221,7 +1221,7 @@ index|index|索引
 table joins| |表连接，MongoDB不支持
 primary key|primary key|主键，MongoDB自动将_id字段设置为主键
 
-#### 1.2 MongoDB术语/概念
+### 1.2 MongoDB术语/概念
 id|user_name|email|age|city
 -|-|-|-|-
 1|Mark Hanks|mark@abc.com|25|Los Angeles
@@ -1242,19 +1242,68 @@ id|user_name|email|age|city
     "user_name":"Richard Peter",
 }
 ```
-#### 1.3 MongoDB数据库
+### 1.3 MongoDB数据库
 ```
 一个mongodb中可以建立多个数据库。
 MongoDB的默认数据库为“db”，该数据库存储在data目录中。
 
 MongDB的单个实例可以容纳多个独立的数据库，每一个都有自己的集合和权限，不同的数据库也放置在不同的文件中。
 ```
-#### 1.4 MongoDB集合
+### 1.4 MongoDB集合
 ```
 集合就是MongDB文档组，类似于RDBMS（关系数据库管理系统：Relation DataBase Management System）中的表格
 
 集合存在于数据库中，集合没有固定的结构，这意味着你在对集合可以插入不同格式和类型的数据，但通常情况下我们插入集合的数据都会有一定的关联性。
 ```
+### 1.5 MongoDB文档
+```
+文档是一个键值（key-value）对（即BSON）。MongoDB的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型，这与关系型数据库有很大的区别，也是MongoDB非常突出的特点。
+
+一个简单的文档例子如下：
+{"genres":["犯罪","剧情"],"title":"肖申克的救赎"}
+```
+### 1.6 MongoDB数据类型
+数据类型|描述
+-|-
+String|字符串。存储数据常用的数据类型。在MongoDB中，UTF-8编码的字符串才是合法的。
+Integer|整型数值。用于存储数值。根据你所采用的服务器，可分为32位或64位。
+Boolean|布尔值。用于存储布尔值（真/假）。
+Double|双精度浮点值。用于存储浮点值。
+Min/Max keys|将一个值与BSON（二进制的JSON）元素的最低值和最高值相对比。
+Arrays|用于将数组或列表或多个值存储为一个键。
+Timestamp|时间戳。记录文档修改或者添加的具体时间。
+Object|用于内嵌文档。
+Null|用于创建空值。
+Symbol|符号。该数据类型基本上等同于字符串类型，但不同的是，它一般用于采用特殊符号类型的语言。
+Date|日期时间。用UNIX时间格式来存储当前日期或时间。你可以指定自己的日期时间：创建Date对象，传入年月日信息。
+Object ID|对象ID。用于创建文档的ID。
+Binary Data|二进制数据。用于存储二进制数据。
+code|代码类型。用于在文档中存储JavaScript代码。
+Regular expression|正则表达式类型。用于存储正则表达式
+
+### 1.7 MongoDB数据库常用命令
+```
+（1）Help查看命令提示
+help
+db.help()
+db.test.help()
+db.test.find().help()
+（2）创建/切换数据库
+use music
+（3）查询数据库
+show dbs
+（4）查看当前使用的数据库
+db/db.getName()
+（5）显示当前DB状态
+db.stats()
+（6）查看当前DB版本
+db.version()
+（7）查看当前DB的链接机器地址
+db.getMongo()
+（8）删除数据库
+db.dropDatabase()
+```
+
 
 
 
