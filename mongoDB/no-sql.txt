@@ -23,5 +23,8 @@ db.huahua.update({name:'m5'},{$inc:{publishNum:200}})
 db.huahua.update({name:'m5'},{$inc:{publishNum:200}},true)
 db.huahua.update({name:'m5'},{$inc:{publishNum:200}},true,true)
 
+3、删除数据
+db.huahua.remove({name:'m4'})
+
 5、查询数据
 db.huahua.find() // 查询数据

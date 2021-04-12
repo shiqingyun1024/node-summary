@@ -1354,7 +1354,39 @@ db.users.update({name:'Lisi'},{$inc:{age:50},$set:{name:'hoho'}},false:true});
 (3)删除
 db.users.remove({age:132})
 ```
-
+### 2.6 集合数据查询
+```
+(1)查询所有记录
+db.userInfo.find()
+// 相当于：select * from userInfo
+(2)查询去重后数据
+db.userInfo.distinct("name")
+// 相当于：select distict name from userInfo
+(3)查询age=22的记录
+db.userInfo.find({"age":22})
+// 相当于：select * from userInfo where age = 22
+(4)查询age>22的记录
+db.userInfo.find({age:{$gt:22}})
+// 相当于：select * from userInfo where age > 22
+(5)查询age<22的记录
+db.userInfo.find({age:{$lt:22}})
+// 相当于：select * from userInfo where age < 22
+(6)查询age>=25的记录
+db.userInfo.find({age:{$gte:25}})
+// 相当于：select * from userInfo where age >= 25
+(7)查询age<=25的记录
+db.userInfo.find({age:{$lte:25}})
+// 相当于：select * from userInfo where age <= 25
+(8)查询age>=23并且age<=26
+db.userInfo.find({age:{$gte:23,$lte:26}})
+(9)查询name中包含mongo的数据
+db.userInfo.find({name:/mongo/})
+// 相当于：%%  
+// select * from userInfo where name like '%mongo%'
+(10)查询name中以mongo开头的数据
+db.userInfo.find({name:/^mongo/})
+// 相当于：select * from userInfo where name like 'mongo%'
+```
 
 
 
