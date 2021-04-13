@@ -1386,6 +1386,21 @@ db.userInfo.find({name:/mongo/})
 (10)查询name中以mongo开头的数据
 db.userInfo.find({name:/^mongo/})
 // 相当于：select * from userInfo where name like 'mongo%'
+(11)查询指定列name、age数据
+db.userInfo.find({},{name:1,age:1})
+// 相当于：select name,age from userInfo
+(12)查询指定列name、age的数据，age>25
+db.userInfo.find({age:{$gt:25}},{name:1,age:1})
+// 相当于：select name,age from userInfo where age > 25
+(13)按照年龄排序
+升序：db.userInfo.find().sort({age:1});
+降序：db.userInfo.find().sort({age:-1});
+(14)查询name=zhangsan,age=22的数据
+db.userInfo.find({name:'zhangsan',age=22})
+// 相当于：select * from userInfo where name = 'zhangsan' and age = '22'
+(15)查询前5条数据
+db.userInfo.find().limit(5);
+// 相当于：select top 5 * from userInfo
 ```
 
 
