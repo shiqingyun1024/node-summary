@@ -1401,6 +1401,16 @@ db.userInfo.find({name:'zhangsan',age=22})
 (15)查询前5条数据
 db.userInfo.find().limit(5);
 // 相当于：select top 5 * from userInfo
+(16)查询10条以后的数据
+db.userInfo.find().skip(10);
+(17)查询在5-10之间的数据
+db.userInfo.find().limit(10).skip(5);
+(18)or与查询
+db.userInfo.find({$or:[{age:22},{age:25}]});
+(19)查询第一条数据
+db.userInfo.findOne();
+(20)查询某个结果集的记录条数
+db.userInfo.find({age:{$gte:25}}).count();
 ```
 
 
