@@ -2,6 +2,9 @@ var template = require('art-template');
 const path = require("path")
 const fs = require('fs')
 
+var jwt = require('jsonwebtoken');
+
+
 const {dataArray} = require('../model/list')
 
 
@@ -54,7 +57,12 @@ const list = (req,res,next)=>{
 }
 
 const token = (req,res,next)=>{
-    res.send('ok')
+    // 对称加密
+    let token = jwt.sign({ username: 'admin' }, 'hahaha');
+    let decoded = jwt.verify(token, 'hahaha');
+    console.log(decoded.foo) // bar
+    res.send(decoded)
+    // 非对称加密
 }
 
 module.exports = {
