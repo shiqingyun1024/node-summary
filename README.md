@@ -1425,6 +1425,13 @@ openssl > genrsa -out rsa_private_key.pem 2048
 根据私钥生成公钥
 openssl > rsa -in rsa_private_key.pem -pubout -out rsa_public_keys.pem
 ```
+# Socket
+## Socket 简介和通信流程
+### 什么是Socket？
+```
+网络上的两个程序通过一个双向的通信连接实现数据的交换，这个连接的一端称为一个socket
+```
+### Socket通信流程
 
 
 
