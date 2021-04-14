@@ -53,4 +53,10 @@ const list = (req,res,next)=>{
     res.send("pages ok")
 }
 
-exports.list = list
+const token = (req,res,next)=>{
+    res.send('ok')
+}
+
+module.exports = {
+    list,token
+}
