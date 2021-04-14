@@ -58,11 +58,15 @@ const list = (req,res,next)=>{
 
 const token = (req,res,next)=>{
     // 对称加密
-    let token = jwt.sign({ username: 'admin' }, 'hahaha');
-    let decoded = jwt.verify(token, 'hahaha');
-    console.log(decoded.foo) // bar
-    res.send(decoded)
+    // let token = jwt.sign({ username: 'admin' }, 'hahaha');
+    // let decoded = jwt.verify(token, 'hahaha');
+    // console.log(decoded.foo) // bar
+    // res.send(decoded)
+
     // 非对称加密
+    let privateKey = fs.readFileSync('../keys/rsa_private_key.pem');
+    let token = jwt.sign({ username: 'admin' }, privateKey);
+    res.send(token)
 }
 
 module.exports = {
