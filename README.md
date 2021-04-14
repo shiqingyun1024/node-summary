@@ -1434,6 +1434,71 @@ openssl > rsa -in rsa_private_key.pem -pubout -out rsa_public_keys.pem
 ### Socket通信流程
 ![通信流程图](https://github.com/814657780/node-summary/blob/main/images/socket.png)
 
+### 基于net模块实现socket
+#### 1、基于Net模块的Socket编程
+##### 1.1 ServerSocket.js
+```
+const net = require('net')
+
+const server = new net.createServer()
+
+let clients = {}
+let clientName = 0
+
+server.on('connection',(client)=>{
+    client.name = ++clientName
+    clients[client.name] = client
+
+    client.on('data',msg=>{
+        <!-- console.log('客户端传来：' + msg) -->
+        broadcast(client, msg.toString())
+    })
+
+    client.on('error',(e)=>{
+        console.log('client error' + e)
+        client.end()
+    })
+
+    client.on('close',(data)=>{
+        delete clients[client.name]
+        console.log(client.name + '下线了')
+    })
+})
+function broadcast(client,msg){
+    for(var key in clients){
+        clients[key].write(client.name+'说：'+msg)
+    }
+}
+
+server.listen(9000,'localhost')
+```
+##### 1.2 ClientSocket.js
+```
+const net = require('net')
+const readline = require('readline')
+
+var port = 9000
+var host = '127.0.0.1'
+
+var socket = new net.Socket()
+socket.setEncoding = 'UTF-8'
+socket.connect(port,host,()=>{
+    socket.write('hello.')
+})
+socket.on('data',(msg)=>{
+    console.log(msg.toString())
+    say()
+})
+socket.on('error',(err)=>{
+    console.log('error'+err)
+})
+socket.on('close',()=>{
+    console.log('connection closed')
+})
+```
+### webSocket
+### 第三方的工具 Socket.io
+
 
 
 
