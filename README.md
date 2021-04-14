@@ -1432,6 +1432,8 @@ openssl > rsa -in rsa_private_key.pem -pubout -out rsa_public_keys.pem
 网络上的两个程序通过一个双向的通信连接实现数据的交换，这个连接的一端称为一个socket
 ```
 ### Socket通信流程
+![通信流程图](https://github.com/814657780/node-summary/blob/main/images/socket.png)
+
 
 
 
