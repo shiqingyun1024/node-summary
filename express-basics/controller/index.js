@@ -64,9 +64,12 @@ const token = (req,res,next)=>{
     // res.send(decoded)
 
     // 非对称加密
-    let privateKey = fs.readFileSync('../keys/rsa_private_key.pem');
-    let token = jwt.sign({ username: 'admin' }, privateKey);
-    res.send(token)
+    let privateKey = fs.readFileSync(path.join(__dirname,'../keys/rsa_private_key.pem'));
+    let publicKey = fs.readFileSync(path.join(__dirname,'../keys/rsa_public_keys.pem'));
+    let token = jwt.sign({ username: 'admin' }, privateKey,{ algorithm: 'RS256'});
+    let decoded = jwt.verify(token, publicKey);
+    // res.send(token)
+    res.send(decoded)
 }
 
 module.exports = {

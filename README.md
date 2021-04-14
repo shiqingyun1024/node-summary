@@ -1412,7 +1412,19 @@ db.userInfo.findOne();
 (20)查询某个结果集的记录条数
 db.userInfo.find({age:{$gte:25}}).count();
 ```
+### JWT
+```
+json web token
+```
+### 非对称秘钥生成
+```
+openssl
+生成秘钥
+openssl > genrsa -out rsa_private_key.pem 2048
 
+根据私钥生成公钥
+openssl > rsa -in rsa_private_key.pem -pubout -out rsa_public_keys.pem
+```
 
 
 
