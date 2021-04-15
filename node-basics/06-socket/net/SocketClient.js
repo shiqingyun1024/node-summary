@@ -6,7 +6,7 @@ const client = net.createConnection({ port: 6527 }, () => {
 });
 client.on('data', (data) => {
   console.log(data.toString());
-  client.end();
+//   client.end();
 });
 client.on('end', () => {
   console.log('disconnected from server');

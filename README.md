@@ -1495,6 +1495,15 @@ socket.on('error',(err)=>{
 socket.on('close',()=>{
     console.log('connection closed')
 })
+const rl = readline.createInterface({
+    input:process.stdin,
+    output:process.stdout
+})
+function say(){
+    rl.question('请输入：\n',inputMsg=>{
+        
+    })
+}
 ```
 ### webSocket
 ### 第三方的工具 Socket.io
