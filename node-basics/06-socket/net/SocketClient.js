@@ -42,7 +42,7 @@ const rl = readline.createInterface({
 function say(){
     rl.question('请输入：\n',inputMsg=>{
         if(inputMsg != 'bye'){
-           // socket.write(inputMsg+'\n')
+           socket.write(inputMsg+'\n')
         }else{
             socket.destroy()
             rl.close()
