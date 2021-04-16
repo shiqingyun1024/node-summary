@@ -1571,9 +1571,28 @@ function broadcast(client,msg){
 </body>
 </html>
 ```
+##### 2.3 WsClient.js
+```
+const ws = new WebSocket('ws://localhost:8081/')
 
+ws.onopen = () =>{
+    ws.send('大家好！')
+}
+ws.onmessage = msg =>{
+    const content = document.getElementById('content')
+    content.innerHTML += msg.data + '<br/>'
+}
 
+ws.onerror = (err)=>{
+    console.log(err)
+}
+
+ws.onclose = (err)=>{
+    console.log('closed~')
+}
+```
 ### 第三方的工具 Socket.io
+#### 基于Socket.io的Socket编程
 
 
 
