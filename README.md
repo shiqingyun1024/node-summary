@@ -1593,6 +1593,27 @@ ws.onclose = (err)=>{
 ```
 ### 第三方的工具 Socket.io
 #### 基于Socket.io的Socket编程
+##### 3.1 SocketIoServer.js
+```
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+// app.use(express.static(__dirname+'/client'))
+
+io.on('connection',socket=>{
+    setInterval(()=>{
+        socket.emit('list','abc')
+    },1000)
+    socket.broadcast.emit('list','test');
+    socket.on('backend',msg=>{
+        console.log(msg)
+    })
+    socket.on('receive',msg=>{
+        console.log(msg)
+    })
+})
+```
 
 
 
