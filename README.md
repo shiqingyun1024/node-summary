@@ -5,6 +5,10 @@ node相关的总结
 ```
 node --inspect --inspect-brk server.js
 ```
+```
+mac电脑上查询某个端口是否被占用，用命令： lsof -i 端口号
+关掉这个进程的命令用的是：kill -9 端口号
+```
 ## node进程管理工具
 ```
 - supervisor 
@@ -1511,6 +1515,64 @@ function say(){
 }
 ```
 ### webSocket
+#### 基于WebSocket的Socket编程
+##### 2.1 WebSocketServer.js
+```
+const WebSocket = require('ws')
+const ws = new WebSocket.Server({port:8081})
+
+let clients = {}
+let clientName = 0
+
+ws.on('connection',client=>{
+    client.name = ++clientName
+    clients[client.name] = client
+
+    client.on('message',msg=>{
+        broadcast(client,msg)
+    })
+
+    client.on('close',()=>{
+        delete clients[client.name]
+        console.log(client.name + '离开了~')
+    })
+})
+
+function broadcast(client,msg){
+    for(var key in clients){
+        client[key].send(client.name + '说' + msg)
+    }
+}
+```
+##### 2.2 index.html
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webSocket</title>
+    <script src="WsClient.js" charset="utf-8"></script>
+</head>
+<body>
+    <h1>gp 交流区</h1>
+    <div id="content" name="name" style="overflow-y: scroll;width:400px;height:300px;"></div>
+    <div>
+        <input type="text" id="msg" style="width: 200px;">
+    </div>
+    <button id="submit">提交</button>
+    <script>
+        document.querySelector("#submit").addEventListener('click',function(){
+           var msg2 = msg.value
+           ws.send(msg2)  // 核心代码，将表单里的数据提交给server端
+           msg.value = ''
+        },false)
+    </script>
+</body>
+</html>
+```
+
+
 ### 第三方的工具 Socket.io
 
 
