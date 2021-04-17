@@ -14,6 +14,6 @@ http.createServer(async (req,res)=>{
     })
     res.write(data)
     res.end()
-}).listen(8080,()=>{
-    console.log('localhost:8080');
+}).listen(3000,()=>{
+    console.log('localhost:3000');
 })
