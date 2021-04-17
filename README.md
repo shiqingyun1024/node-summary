@@ -1617,6 +1617,19 @@ io.on('connection',socket=>{
     })
 })
 ```
+# Node.js项目
+### 前端（Front end）
+- 前端工程化环境（webpack）
+- CSS预处理工具（sass）
+- JS模块化：ES Module，CommonJS Module
+- JS库：jQuery
+- SPA：single page application，路由：SME-Router
+- UI组件库：Bootstrap(AdminTE)
+### 后端（Back end）
+- Node.js
+- Express
+- MongoDB（Mongoose）// 驱动程序
+
 
 
 
