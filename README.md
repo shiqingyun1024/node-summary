@@ -1593,6 +1593,9 @@ ws.onclose = (err)=>{
 ```
 ### 第三方的工具 Socket.io
 #### 基于Socket.io的Socket编程
+```
+主要是有些浏览器不支持HTML5，导致webSocket使用不了，所以要用Socket.io这个第三方工具。
+```
 ##### 3.1 SocketIoServer.js
 ```
 var express = require('express');
