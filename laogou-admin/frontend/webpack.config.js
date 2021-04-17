@@ -15,10 +15,8 @@ module.exports = {
 
     // 插件plugin的集合
     plugins:[
-        new HtmlWebpackPlugin({
-
-        })
-    ]
+        new HtmlWebpackPlugin()
+    ],
 
 
     // 模式
