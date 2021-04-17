@@ -19,14 +19,15 @@ module.exports = {
 
     // 插件plugin的集合
     plugins: [
-        // 把打包后的资源引入html中
-        new HtmlWebpackPlugin(),
+        // 把打包后的资源引入html中，如果HtmlWebpackPlugin中不写template这个参数，HtmlWebpackPlugin会自己创建一个index.html,然后引入打包之后的文件
+        new HtmlWebpackPlugin({
+            template:'./public/index.html'
+        }),
         // copy文件到dist目录下
         // new CopyWebpackPlugin({patterns:[{ from: 'public/favicon.ico', to: 'imgages' }]}),  // CopyWebpackPlugin6.0以上的版本这样使用
         // from to中的to写的是拷贝到dist目录下的哪个文件夹下，如果不写，会直接放在dist目录下
         new CopyWebpackPlugin([
-            { from: resolve(__dirname, 'public/favicon.ico') },
-            { from: resolve(__dirname, 'public/1.json') }
+            { from: resolve(__dirname, 'public/favicon.ico') }
             //   { from: 'other', to: 'public' },
         ]),
         // 打包的时候每次先清空dist目录
