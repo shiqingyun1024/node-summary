@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>webSocket</title>
-    <script src="./scripts/WsClient.js" charset="utf-8"></script>
+    <title>socket.io</title>
+    <script src="./scripts/socket.io.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -17,11 +17,18 @@
     </div>
     <button id="submit">提交</button>
     <script>
+        var socket = io.connect('http://192.168.31.135:9527')
+        const connect = document.getElementById('content')
         document.querySelector("#submit").addEventListener('click', function () {
             var msg2 = msg.value
-            ws.send(msg2)  // 核心代码，将表单里的数据提交给server端
+            socket.emit('receive',msg2) // 核心代码
             msg.value = ''
+            connect.innerHTML += msg2 + '<br/>'
         }, false)
+
+        socket.on('message',msg=>{
+            connect.innerHTML += msg + '<br/>'
+        })
     </script>
 </body>
 
