@@ -8,8 +8,11 @@ module.exports = {
 
     // 出口文件
     output:{
-        filename:'',
-        path:resolve(__dirname,'build')
-    }
+        filename:'app.js',
+        path:resolve(__dirname,'dist')
+    },
+
+    // 模式
+    mode: 'development'
 
 }
