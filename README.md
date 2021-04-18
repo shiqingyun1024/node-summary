@@ -1630,6 +1630,42 @@ io.on('connection',socket=>{
 - Express
 - MongoDB（Mongoose）// 驱动程序
 
+#### UI组件库
+arttemplate
+- 官方网站：http://aui.github.io/art-template/webpack/
+- 使用方法
+```
+module.exports = {
+    module:{
+        rules:[
+            {
+                test: /\.jpg$/,
+                loader:"file-loader"
+            },{
+                test: /\.png$/,
+                loader:"url-loader?mimetype=image/png"
+            },{
+                test: /\.arts$/,
+                loader:"art-template-loader",
+                options:{
+                    // art-template options (if necessary)
+                    // @see https://github.com/aui/art-template
+                }
+            }
+        ]
+    }
+}
+```
+##### admin-lte
+- https://adminlte.xueyao.org/pages/index.html
+##### PM2
+- 官方网站：http://pm2.keymetrics.io/
+- 官方网站：https://www.jianshu.com/p/6dbe6fa04520
+- 关键配置：http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/  注意：可以在args参数里配置脚本参数
+执行pm2 ecostyem，会生成一个ecosystem.config.js文件 将以下代码替换module.exports后面的部分
+
+
+
 
 
 
