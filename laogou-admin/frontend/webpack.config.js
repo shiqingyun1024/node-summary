@@ -15,14 +15,18 @@ module.exports = {
 
     // 出口文件
     output: {
-        filename: 'app.js',
+        filename: 'js/[name].[hash:8].js',
         path: resolve(__dirname, 'dist')
     },
 
     // loader的结合
     module: {
         rules: [
-
+           {
+               test:/\.art$/,
+               exclude:/node_modules/,
+               use:["art-template-loader"]
+           }
         ]
     },
 
@@ -36,7 +40,8 @@ module.exports = {
         // new CopyWebpackPlugin({patterns:[{ from: 'public/favicon.ico', to: 'imgages' }]}),  // CopyWebpackPlugin6.0以上的版本这样使用
         // from to中的to写的是拷贝到dist目录下的哪个文件夹下，如果不写，会直接放在dist目录下
         new CopyWebpackPlugin([
-            { from: resolve(__dirname, 'public/favicon.ico') }
+            { from: resolve(__dirname, 'public/favicon.ico') },
+            { from: resolve(__dirname, 'public/libs'),to:resolve(__dirname,'./dist/libs/') }
             //   { from: 'other', to: 'public' },
         ]),
         // 打包的时候每次先清空dist目录
