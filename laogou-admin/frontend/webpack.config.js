@@ -26,7 +26,12 @@ module.exports = {
                test:/\.art$/,
                exclude:/node_modules/,
                use:["art-template-loader"]
-           }
+           },
+           {
+            test:/\.css$/,
+            exclude:/node_modules/,
+            use:["style-loader","css-loader"]
+        }
         ]
     },
 
