@@ -18,6 +18,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "art-template": "^4.13.2"
+    "art-template": "^4.13.2",
+    "sme-router": "^0.12.8"
   }
 }
