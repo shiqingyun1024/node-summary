@@ -6,6 +6,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
     // 模式
     mode: 'development',
+
+    devtool: 'source-map',
     // 入口文件
     entry: {
         app: './src/app.js'
