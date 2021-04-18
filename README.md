@@ -1625,6 +1625,7 @@ io.on('connection',socket=>{
 - JS库：jQuery
 - SPA：single page application，路由：SME-Router
 - UI组件库：Bootstrap(AdminTE)
+- RMVC: Art-template // 模板
 ### 后端（Back end）
 - Node.js
 - Express

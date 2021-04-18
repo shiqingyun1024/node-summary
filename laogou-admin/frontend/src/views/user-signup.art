@@ -1,0 +1,32 @@
+<div class="box">
+    <div class="box-header">
+        <button class="btn btn-primary">添加</button>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>用户名</th>
+                    <th style="width: 120px">操作</th>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>admin</td>
+                    <td><button class="btn btn-danger">删除</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+            <li><a href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+    </div>
+</div>
