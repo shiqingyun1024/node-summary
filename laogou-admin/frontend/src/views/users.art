@@ -42,24 +42,24 @@
                 <div class="modal-body">
                     <div class="box-primary">
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" id="users-form">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">邮箱地址</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="输入邮箱">
+                                    <label for="username">用户名</label>
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="请输入用户名">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">密码</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1"
-                                        placeholder="密码">
+                                    <label for="password">密码</label>
+                                    <input type="password" name="password" class="form-control" id="password"
+                                        placeholder="请输入密码">
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="users-close">关闭</button>
+                    <button type="button" class="btn btn-primary" id="users-save">保存</button>
                 </div>
             </div>
         </div>
