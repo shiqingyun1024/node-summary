@@ -1319,6 +1319,8 @@ mongo
 2、mac
 mongod --config /usr/local/etc/mongod.conf
 mongo
+
+进入到bin目录之后，用 ./mongo启动
 ```
 ### 2.3 数据库操作
 ```

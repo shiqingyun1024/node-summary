@@ -1,13 +1,15 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/lagou-admin');
+mongoose.connect('mongodb://localhost/lagou-admin',{useNewUrlParser: true,useUnifiedTopology: true});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-var kittySchema = mongoose.Schema({
-    name: String
+// 构建users的model
+var usersSchema = mongoose.Schema({
+    username: String,
+    password: String,
   });
 
-var Kitten = mongoose.model('Kitten', kittySchema);
-var felyne = new Kitten({ name: 'Felyne' });
-felyne.save()
+var Users = mongoose.model('users', usersSchema);
+
+module.exports = Users
