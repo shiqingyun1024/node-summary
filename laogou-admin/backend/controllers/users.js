@@ -1,8 +1,10 @@
 const usersModel = require('../models/users')
+const { hash } = require('../utils/tools')
 
 // 注册用户
 const signup = async (req, res, next) => {
     const { username, password } = req.body
+    let bcryptPassword = await hash(password);
 
     // 判断用户是否存在
     let findResult = await usersModel.findUser(username)
@@ -17,7 +19,8 @@ const signup = async (req, res, next) => {
         // 数据库里没有这个用户，开始添加用户
         let result = await usersModel.signup({
             username,
-            password
+            password:bcryptPassword
+            // password:hash(password)
         })
         console.log(result);
         res.render('succ', {
