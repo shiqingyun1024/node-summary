@@ -33,4 +33,12 @@ const signup = async (req, res, next) => {
 
 }
 
-module.exports = signup
+// 用户列表
+const list = async (req,res)=>{
+    const listResult = await usersModel.findList()
+    res.render('succ',{
+      data:JSON.stringify(listResult)   
+    })
+}
+
+module.exports = {signup,list}

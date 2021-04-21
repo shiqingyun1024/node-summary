@@ -1,3 +1,4 @@
+// 操作数据库定义的方法
 const Users = require('../utils/db')
 
 // 校验唯一性
@@ -15,4 +16,8 @@ const signup = ({username,password})=>{
     // console.log(result);  
 }
 
-module.exports = {signup,findUser}
+const findList = ()=>{
+    return Users.find()
+}
+
+module.exports = {signup,findUser,findList}
