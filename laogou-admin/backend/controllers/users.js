@@ -35,6 +35,7 @@ const signup = async (req, res, next) => {
 
 // 用户列表
 const list = async (req,res)=>{
+    res.set('content-type','application/json;charset=utf-8')
     const listResult = await usersModel.findList()
     res.render('succ',{
       data:JSON.stringify(listResult)   

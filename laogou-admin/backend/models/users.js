@@ -17,7 +17,8 @@ const signup = ({username,password})=>{
 }
 
 const findList = ()=>{
-    return Users.find()
+    // 获取列表数据并且进行排序  sort排序
+    return Users.find().sort({_id:-1})
 }
 
 module.exports = {signup,findUser,findList}
