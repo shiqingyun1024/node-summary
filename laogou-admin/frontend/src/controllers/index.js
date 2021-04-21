@@ -15,8 +15,8 @@ const _signup = () =>{
     // 提交表单
     const data = $('#users-form').serialize()
     $.ajax({
-        url:'http://localhost:3000/api/users/signup',
-        type:'post',
+        url:'/api/users/signup',
+        type:'get',
         data,
         success(res){
             console.log(res);
