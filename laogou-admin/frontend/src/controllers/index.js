@@ -10,9 +10,19 @@ const _handleSubmit = (router)=>{
         router.go('/index')
     }
 }
+// 
 const _signup = () =>{
+    // 提交表单
     const data = $('#users-form').serialize()
-    console.log(data);
+    $.ajax({
+        url:'http://localhost:3000/api/users/signup',
+        type:'post',
+        data,
+        success(res){
+            console.log(res);
+        }
+    })
+    // 关闭模态框
     $('#users-close').click();
 }
 

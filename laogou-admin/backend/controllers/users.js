@@ -3,7 +3,9 @@ const { hash } = require('../utils/tools')
 
 // 注册用户
 const signup = async (req, res, next) => {
+    res.set('content-type','application/json;charset=utf-8')
     const { username, password } = req.body
+    
     let bcryptPassword = await hash(password);
 
     // 判断用户是否存在
@@ -20,13 +22,11 @@ const signup = async (req, res, next) => {
         let result = await usersModel.signup({
             username,
             password:bcryptPassword
-            // password:hash(password)
         })
-        console.log(result);
+        
         res.render('succ', {
             data: JSON.stringify({
-                username,
-                password
+                message:'注册成功！'
             })
         })
     }
