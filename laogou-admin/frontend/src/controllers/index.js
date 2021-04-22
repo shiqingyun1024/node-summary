@@ -8,21 +8,23 @@ const htmlSignin = signinTpl({})
 const pageSize = 10;
 let dataList = [];
 
-const _handleSubmit = (router)=>{
-    return (e)=>{
+const _handleSubmit = (router) => {
+    return (e) => {
         e.preventDefault()
         router.go('/index')
     }
 }
 // 
-const _signup = () =>{
+const _signup = () => {
     // 提交表单
     const data = $('#users-form').serialize()
     $.ajax({
-        url:'/api/users/signup',
-        type:'post',
+        url: '/api/users/signup',
+        type: 'post',
         data,
-        success(res){
+        success(res) {
+            // 添加数据后渲染
+            _loadData()
             _list(1);
         }
     })
@@ -31,69 +33,63 @@ const _signup = () =>{
 }
 
 // 分页函数
-const _pagination = data=>{
+const _pagination = data => {
     const total = data.length;
-    const pageCount = Math.ceil(total/pageSize)
+    const pageCount = Math.ceil(total / pageSize)
     const pageArray = new Array(pageCount)
     const htmlPage = usersListPageTpl({
         pageArray
     })
     $("#users-page").html(htmlPage)
     $("#users-page-list li:nth-child(2)").addClass('active')
-    $("#users-page-list li:not(:first-child,:last-child)").on('click',function(){
+    $("#users-page-list li:not(:first-child,:last-child)").on('click', function () {
         $(this).addClass('active').siblings().removeClass('active')
         _list($(this).index());
     })
 }
 
 // 
-const _loadData = ()=>{
+const _loadData = () => {
     $.ajax({
-        url:'/api/users/list',
-        success(result){
+        url: '/api/users/list',
+        success(result) {
             dataList = result.data;
-            let start = (pageNo-1)*pageSize
-            $("#users-list").html(usersListTpl({
-                data:result.data.slice(start,start+pageSize)
-            }))
+            // 分页
+            _pagination(result.data)
         }
     })
 }
 
 // 获取列表数据并渲染
-const _list = (pageNo) =>{
-    $.ajax({
-        url:'/api/users/list',
-        success(result){
-            let start = (pageNo-1)*pageSize
-            $("#users-list").html(usersListTpl({
-                data:result.data.slice(start,start+pageSize)
-            }))
-        }
-    })
+const _list = (pageNo) => {
+    let start = (pageNo - 1) * pageSize
+    $("#users-list").html(usersListTpl({
+        data: result.data.slice(start, start + pageSize)
+    }))
 }
 
-const signin = router=>{
+const signin = router => {
     return (req, res, next) => {
         res.render(htmlSignin)
-        $("#signin").on('submit',_handleSubmit(router))
+        $("#signin").on('submit', _handleSubmit(router))
     }
 }
-const index = router=>{
+const index = router => {
     return (req, res, next) => {
         // 渲染首页
         res.render(htmlIndex)
         // 填充用户列表
         $('#content').html(usersTpl());
 
-        // 渲染list
-        _list(1)
+        // 初次渲染list
+        _loadData()
+        _list(1);
 
         // 分页
         _pagination(result.data)
 
         // 点击保存，提交表单
-        $('#users-save').on('click',_signup)
+        $('#users-save').on('click', _signup)
     }
 }
 export {
