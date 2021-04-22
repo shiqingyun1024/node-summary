@@ -2,6 +2,7 @@ import indexTpl from '../views/index.art'
 import signinTpl from '../views/signin.art'
 import usersTpl from '../views/users.art'
 import usersListTpl from '../views/users-list.art'
+import usersListPageTpl from '../views/users-pages.art'
 const htmlIndex = indexTpl({})
 const htmlSignin = signinTpl({})
 
@@ -27,6 +28,18 @@ const _signup = () =>{
     $('#users-close').click();
 }
 
+// 分页函数
+const _pagination = data=>{
+    const pageSzie = 10;
+    const total = data.length;
+    const pageCount = Math.ceil(total/pageSize)
+    const htmlPage = usersListPageTpl({
+        pageCount
+    })
+    $("#users-page").html(htmlPage)
+
+}
+
 // 获取列表数据并渲染
 const _list = () =>{
     $.ajax({
@@ -35,6 +48,8 @@ const _list = () =>{
             $("#users-list").html(usersListTpl({
                 data:result.data
             }))
+
+            _pagination(result.data)
         }
     })
 }
