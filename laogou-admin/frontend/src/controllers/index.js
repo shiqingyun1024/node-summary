@@ -50,13 +50,17 @@ const _pagination = data => {
 
 // 
 const _loadData = () => {
-    $.ajax({
-        url: '/api/users/list',
-        success(result) {
-            dataList = result.data;
-            // 分页
-            _pagination(result.data)
-        }
+    return new promise((resolve,reject)=>{
+        $.ajax({
+            url: '/api/users/list',
+            async:false,
+            success(result) {
+                dataList = result.data;
+                // 分页
+                _pagination(result.data)
+                resolve(dataList)
+            }
+        })
     })
 }
 
@@ -64,7 +68,7 @@ const _loadData = () => {
 const _list = (pageNo) => {
     let start = (pageNo - 1) * pageSize
     $("#users-list").html(usersListTpl({
-        data: result.data.slice(start, start + pageSize)
+        data: dataList.slice(start, start + pageSize)
     }))
 }
 
@@ -82,11 +86,13 @@ const index = router => {
         $('#content').html(usersTpl());
 
         // 初次渲染list
-        _loadData()
-        _list(1);
+        _loadData().then(()=>{
+            _list(1);
 
-        // 分页
-        _pagination(result.data)
+            // 分页
+            _pagination(dataList)
+        })
+        
 
         // 点击保存，提交表单
         $('#users-save').on('click', _signup)
