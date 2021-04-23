@@ -19,7 +19,7 @@ const _signup = () => {
     // 提交表单
     const data = $('#users-form').serialize()
     $.ajax({
-        url: '/api/users/signup',
+        url: '/api/users/',
         type: 'post',
         data,
         success(res) {
@@ -50,7 +50,8 @@ const _pagination = data => {
 // 请求数据
 const _loadData = () => {
     $.ajax({
-        url: '/api/users/list',
+        url: '/api/users/',
+        type:'get',
         // async:false,
         success(result) {
             dataList = result.data;

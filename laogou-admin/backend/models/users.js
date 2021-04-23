@@ -16,9 +16,16 @@ const signup = ({username,password})=>{
     // console.log(result);  
 }
 
+// 获取列表数据，并进行排序
 const findList = ()=>{
     // 获取列表数据并且进行排序  sort排序
     return Users.find().sort({_id:-1})
 }
 
-module.exports = {signup,findUser,findList}
+// 删除用户
+const remove = id=>{
+//    return Users.deleteOne({_id})
+   return Users.findByIdAndRemove(id)
+}
+
+module.exports = {signup,findUser,findList,remove}

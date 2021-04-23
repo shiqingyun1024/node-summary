@@ -34,7 +34,7 @@ const signup = async (req, res, next) => {
 }
 
 // 用户列表
-const list = async (req,res)=>{
+const list = async (req,res,next)=>{
     res.set('content-type','application/json;charset=utf-8')
     const listResult = await usersModel.findList()
     res.render('succ',{
@@ -42,4 +42,11 @@ const list = async (req,res)=>{
     })
 }
 
-module.exports = {signup,list}
+// 删除用户
+const remove = async (req,res,next)=>{
+   let {id} = req.body
+  // 记住一定要加await   
+   await usersModel.remove(id)
+}
+
+module.exports = {signup,list,remove}
