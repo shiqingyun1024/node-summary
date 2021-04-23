@@ -14,7 +14,7 @@ const _handleSubmit = (router) => {
         router.go('/index')
     }
 }
-// 
+// 提交新增用户
 const _signup = () => {
     // 提交表单
     const data = $('#users-form').serialize()
@@ -25,7 +25,6 @@ const _signup = () => {
         success(res) {
             // 添加数据后渲染
             _loadData()
-            _list(1);
         }
     })
     // 关闭模态框
@@ -48,19 +47,17 @@ const _pagination = data => {
     })
 }
 
-// 
+// 请求数据
 const _loadData = () => {
-    return new promise((resolve,reject)=>{
-        $.ajax({
-            url: '/api/users/list',
-            async:false,
-            success(result) {
-                dataList = result.data;
-                // 分页
-                _pagination(result.data)
-                resolve(dataList)
-            }
-        })
+    $.ajax({
+        url: '/api/users/list',
+        // async:false,
+        success(result) {
+            dataList = result.data;
+            // 分页
+            _pagination(result.data)
+            _list(1);
+        }
     })
 }
 
@@ -72,27 +69,29 @@ const _list = (pageNo) => {
     }))
 }
 
+// 登录之后渲染数据
 const signin = router => {
     return (req, res, next) => {
         res.render(htmlSignin)
         $("#signin").on('submit', _handleSubmit(router))
     }
 }
+
+// 初始化数据
 const index = router => {
-    return (req, res, next) => {
+    return async (req, res, next) => {
         // 渲染首页
         res.render(htmlIndex)
         // 填充用户列表
         $('#content').html(usersTpl());
 
         // 初次渲染list
-        _loadData().then(()=>{
-            _list(1);
+        await _loadData()
 
-            // 分页
-            _pagination(dataList)
-        })
-        
+
+        // 分页
+        _pagination(dataList)
+
 
         // 点击保存，提交表单
         $('#users-save').on('click', _signup)
