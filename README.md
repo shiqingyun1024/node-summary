@@ -1671,6 +1671,13 @@ module.exports = {
 执行pm2 ecostyem，会生成一个ecosystem.config.js文件 将以下代码替换module.exports后面的部分
 
 #####  cookie和session登录的方案
+```
+后端往前端种cookie
+const sessionId = randomstring.generate()
+res.append('Set-Cookie', `sessionId=${sessionId}; Path=/; HttpOnly`)
+前端不需要做处理，请求时会cookie（后端种下的cookie）自动带上（浏览器做的，相当于浏览器和后端的一个协定），即使一个图片请求也会带上，所以关于网站性能优化的方法有减少http这个方法（因为每次http请求都会把所有的请求头资源发送过去，携带的资源特别多，所以请求会慢，网站加载会慢）
+cookie跟域名是保持一致的，只要是在这个域名下，cookie就是一定的，
+```
 #####  token登录的方案
 
 

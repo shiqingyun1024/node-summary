@@ -1,6 +1,7 @@
 const usersModel = require('../models/users')
 const {hash,compare} = require('../utils/tools')
 const randomstring = require("randomstring");
+// const cookieSession = require('cookie-session')
 
 // 注册用户
 const signup = async (req, res, next) => {
@@ -51,12 +52,13 @@ const signin = async (req, res, next)=>{
         let compareResult = await compare(password,hash)
         console.log(compareResult);
         if(compareResult){
+            const sessionId = randomstring.generate()
+            res.append('Set-Cookie', `sessionId=${sessionId}; Path=/; HttpOnly`)
             res.render('succ', {
                 data: JSON.stringify({
                     username
                 })
             })
-            const sessionId = randomstring.generate()
         }else{
             res.render('fail', {
                 data: JSON.stringify({
