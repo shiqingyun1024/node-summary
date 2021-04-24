@@ -1,5 +1,6 @@
 const usersModel = require('../models/users')
 const {hash,compare} = require('../utils/tools')
+const randomstring = require("randomstring");
 
 // 注册用户
 const signup = async (req, res, next) => {
@@ -55,6 +56,7 @@ const signin = async (req, res, next)=>{
                     username
                 })
             })
+            const sessionId = randomstring.generate()
         }else{
             res.render('fail', {
                 data: JSON.stringify({
