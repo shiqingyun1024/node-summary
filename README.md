@@ -1670,6 +1670,10 @@ module.exports = {
 - 关键配置：http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/  注意：可以在args参数里配置脚本参数
 执行pm2 ecostyem，会生成一个ecosystem.config.js文件 将以下代码替换module.exports后面的部分
 
+#####  cookie和session登录的方案
+#####  token登录的方案
+
+
 
 
 

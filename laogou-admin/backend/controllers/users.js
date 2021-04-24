@@ -1,7 +1,5 @@
 const usersModel = require('../models/users')
-const {
-    hash
-} = require('../utils/tools')
+const {hash,compare} = require('../utils/tools')
 
 // 注册用户
 const signup = async (req, res, next) => {
@@ -32,6 +30,42 @@ const signup = async (req, res, next) => {
         res.render('succ', {
             data: JSON.stringify({
                 message: '注册成功！'
+            })
+        })
+    }
+
+}
+
+// 用户登录
+const signin = async (req, res, next)=>{
+    // post请求,请求中传过来的password，例如123
+    const { username,password } = req.body;
+
+    let result = await usersModel.findUser(username)
+    console.log(result);
+    // 验证用户是否是合法用户（密码是否正确）
+    if(result){
+        // 这个password是hash加密之后存在数据库里面的password
+        let {password:hash} = result
+        let compareResult = await compare(password,hash)
+        console.log(compareResult);
+        if(compareResult){
+            res.render('succ', {
+                data: JSON.stringify({
+                    username
+                })
+            })
+        }else{
+            res.render('fail', {
+                data: JSON.stringify({
+                    message: '用户名或密码错误'
+                })
+            })
+        }
+    }else{
+        res.render('fail', {
+            data: JSON.stringify({
+                message: '用户名或密码错误'
             })
         })
     }
@@ -74,5 +108,6 @@ const remove = async (req, res, next) => {
 module.exports = {
     signup,
     list,
-    remove
+    remove,
+    signin
 }
