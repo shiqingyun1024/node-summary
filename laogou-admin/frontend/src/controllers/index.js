@@ -51,7 +51,7 @@ const _pagination = data => {
 const _loadData = () => {
     $.ajax({
         url: '/api/users/',
-        type:'get',
+        type: 'get',
         // async:false,
         success(result) {
             dataList = result.data;
@@ -80,14 +80,30 @@ const signin = router => {
 
 // 初始化数据
 const index = router => {
-    return async (req, res, next) => {
+    return (req, res, next) => {
         // 渲染首页
         res.render(htmlIndex)
         // 填充用户列表
         $('#content').html(usersTpl());
+        $('#users-list').on('click', '.remove', function () {
+            $.ajax({
+                url: '/api/users/',
+                type: 'delete',
+                data: {
+                    id: $(this).data('id')
+                },
+                success() {
+                    console.log('01');
+                    // 初次渲染list
+                    _loadData()
+                    // 分页
+                    _pagination(dataList)
+                }
+            })
+        })
 
         // 初次渲染list
-        await _loadData()
+        _loadData()
 
 
         // 分页

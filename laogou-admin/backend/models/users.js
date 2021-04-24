@@ -24,8 +24,7 @@ const findList = ()=>{
 
 // 删除用户
 const remove = id=>{
-//    return Users.deleteOne({_id})
-   return Users.findByIdAndRemove(id)
+   return Users.deleteOne({_id:id})
 }
 
 module.exports = {signup,findUser,findList,remove}
