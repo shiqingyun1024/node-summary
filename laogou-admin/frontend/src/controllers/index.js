@@ -5,7 +5,8 @@ import usersListTpl from '../views/users-list.art'
 import usersListPageTpl from '../views/users-pages.art'
 const htmlIndex = indexTpl({})
 const htmlSignin = signinTpl({})
-const pageSize = 10;
+const pageSize = 3;
+let curPage = 1;
 let dataList = [];
 
 const _handleSubmit = (router) => {
@@ -40,11 +41,7 @@ const _pagination = data => {
         pageArray
     })
     $("#users-page").html(htmlPage)
-    $("#users-page-list li:nth-child(2)").addClass('active')
-    $("#users-page-list li:not(:first-child,:last-child)").on('click', function () {
-        $(this).addClass('active').siblings().removeClass('active')
-        _list($(this).index());
-    })
+    _setPageActive(curPage)
 }
 
 // 请求数据
@@ -57,7 +54,7 @@ const _loadData = () => {
             dataList = result.data;
             // 分页
             _pagination(result.data)
-            _list(1);
+            _list(curPage);
         }
     })
 }
@@ -78,6 +75,15 @@ const signin = router => {
     }
 }
 
+// 设置当前页
+const _setPageActive = (index)=>{
+    $("#users-page #users-page-list li:not(:first-child,:last-child)")
+    .eq(index -1)
+    .addClass('active')
+    .siblings()
+    .removeClass('active')
+}
+
 // 初始化数据
 const index = router => {
     return (req, res, next) => {
@@ -96,10 +102,33 @@ const index = router => {
                     console.log('01');
                     // 初次渲染list
                     _loadData()
+                    if(Math.ceil(dataList.length/pageSize)===curPage&&dataList.length%pageSize===1&&curPage > 0){
+                        curPage--
+                    }
                     // 分页
                     _pagination(dataList)
                 }
             })
+        })
+        $("#users-page").on('click', '#users-page-list li:not(:first-child,:last-child)',function () {
+            const index = $(this).index();
+            _list(index)
+            curPage = index
+            _setPageActive(curPage)
+        })
+        $("#users-page").on('click', '#users-page-list li:first-child',function () {
+            if(curPage > 1){
+                curPage--
+                _list(curPage)
+                _setPageActive(curPage)
+            }
+        })
+        $("#users-page").on('click', '#users-page-list li:last-child',function () {
+            if(curPage < Math.ceil(dataList.length/pageSize)){
+                curPage++
+                _list(curPage)
+                _setPageActive(curPage)
+            }
         })
 
         // 初次渲染list
