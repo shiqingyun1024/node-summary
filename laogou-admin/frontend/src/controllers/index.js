@@ -3,6 +3,7 @@ import signinTpl from '../views/signin.art'
 import usersTpl from '../views/users.art'
 import usersListTpl from '../views/users-list.art'
 import usersListPageTpl from '../views/users-pages.art'
+import router from '../routes'
 const htmlIndex = indexTpl({})
 const htmlSignin = signinTpl({})
 const pageSize = 3;
@@ -110,6 +111,7 @@ const index = router => {
                 }
             })
         })
+        // 分页事件绑定
         $("#users-page").on('click', '#users-page-list li:not(:first-child,:last-child)',function () {
             const index = $(this).index();
             _list(index)
@@ -129,6 +131,12 @@ const index = router => {
                 _list(curPage)
                 _setPageActive(curPage)
             }
+        })
+
+        // 退出登录
+        $("#users-signout").on('click',(e)=>{
+            e.preventDefault();
+           router.go('/signin')
         })
 
         // 初次渲染list

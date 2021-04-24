@@ -8,7 +8,7 @@ const htmlSignin = signinTpl({})
 
 const router = new SMERouter('root')
 
-router.route('/', signin(router))
+router.route('/signin', signin(router))
 
 router.route('/index', index(router))
 
