@@ -84,6 +84,17 @@ const signin = async (req, res, next)=>{
 
 }
 
+// 退出登录
+const signout = async(req,res,next)=>{
+    console.log(12);
+    req.session = null
+    res.render('succ', {
+        data: JSON.stringify({
+            message: '成功退出登录'
+        })
+    })
+}
+
 // 用户列表
 const list = async (req, res, next) => {
     res.set('content-type', 'application/json;charset=utf-8')
@@ -121,5 +132,6 @@ module.exports = {
     signup,
     list,
     remove,
-    signin
+    signin,
+    signout
 }
