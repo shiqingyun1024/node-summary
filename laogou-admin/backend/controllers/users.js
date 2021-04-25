@@ -50,15 +50,23 @@ const signin = async (req, res, next)=>{
         // 这个password是hash加密之后存在数据库里面的password
         let {password:hash} = result
         let compareResult = await compare(password,hash)
-        console.log(compareResult);
         if(compareResult){
-            const sessionId = randomstring.generate()
-            res.append('Set-Cookie', `sessionId=${sessionId}; Path=/; HttpOnly`)
+            // const sessionId = randomstring.generate()
+            // res.append('Set-Cookie', `sessionId=${sessionId}; Path=/; HttpOnly`)
+
+            // console.log(req.session);
+            req.session.username = username
+            // app.use(cookieSession({
+            //     name: 'session',
+            //     keys: ['key1', 'key2']
+            //   }))
             res.render('succ', {
                 data: JSON.stringify({
                     username
                 })
             })
+            // req.session.username = username
+            
         }else{
             res.render('fail', {
                 data: JSON.stringify({

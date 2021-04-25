@@ -23,6 +23,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(cors())
 
+// 设置cookie-session
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
+
 app.use('/api/users', usersRouter);
 
 // catch 404 and forward to error handler
