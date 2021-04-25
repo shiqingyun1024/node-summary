@@ -13,7 +13,18 @@ let dataList = [];
 const _handleSubmit = (router) => {
     return (e) => {
         e.preventDefault()
-        router.go('/index')
+        // 提交表单
+        const data = $('#signin').serialize()
+        $.ajax({
+            url: '/api/users/signin',
+            type: 'post',
+            data,
+            success(res) {
+                if(res.ret){
+                    router.go('/index')
+                }
+            }
+        })
     }
 }
 // 提交新增用户
@@ -77,12 +88,12 @@ const signin = router => {
 }
 
 // 设置当前页
-const _setPageActive = (index)=>{
+const _setPageActive = (index) => {
     $("#users-page #users-page-list li:not(:first-child,:last-child)")
-    .eq(index -1)
-    .addClass('active')
-    .siblings()
-    .removeClass('active')
+        .eq(index - 1)
+        .addClass('active')
+        .siblings()
+        .removeClass('active')
 }
 
 // 初始化数据
@@ -103,7 +114,7 @@ const index = router => {
                     console.log('01');
                     // 初次渲染list
                     _loadData()
-                    if(Math.ceil(dataList.length/pageSize)===curPage&&dataList.length%pageSize===1&&curPage > 0){
+                    if (Math.ceil(dataList.length / pageSize) === curPage && dataList.length % pageSize === 1 && curPage > 0) {
                         curPage--
                     }
                     // 分页
@@ -112,21 +123,21 @@ const index = router => {
             })
         })
         // 分页事件绑定
-        $("#users-page").on('click', '#users-page-list li:not(:first-child,:last-child)',function () {
+        $("#users-page").on('click', '#users-page-list li:not(:first-child,:last-child)', function () {
             const index = $(this).index();
             _list(index)
             curPage = index
             _setPageActive(curPage)
         })
-        $("#users-page").on('click', '#users-page-list li:first-child',function () {
-            if(curPage > 1){
+        $("#users-page").on('click', '#users-page-list li:first-child', function () {
+            if (curPage > 1) {
                 curPage--
                 _list(curPage)
                 _setPageActive(curPage)
             }
         })
-        $("#users-page").on('click', '#users-page-list li:last-child',function () {
-            if(curPage < Math.ceil(dataList.length/pageSize)){
+        $("#users-page").on('click', '#users-page-list li:last-child', function () {
+            if (curPage < Math.ceil(dataList.length / pageSize)) {
                 curPage++
                 _list(curPage)
                 _setPageActive(curPage)
@@ -134,9 +145,9 @@ const index = router => {
         })
 
         // 退出登录
-        $("#users-signout").on('click',(e)=>{
+        $("#users-signout").on('click', (e) => {
             e.preventDefault();
-           router.go('/signin')
+            router.go('/signin')
         })
 
         // 初次渲染list

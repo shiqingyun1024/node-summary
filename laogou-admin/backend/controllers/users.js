@@ -40,6 +40,7 @@ const signup = async (req, res, next) => {
 
 // 用户登录
 const signin = async (req, res, next)=>{
+    res.set('content-type', 'application/json;charset=utf-8')
     // post请求,请求中传过来的password，例如123
     const { username,password } = req.body;
 
@@ -128,10 +129,30 @@ const remove = async (req, res, next) => {
 
 }
 
+// 权限校验
+const isAuth = async (req,res,next)=>{
+    res.set('content-type', 'application/json;charset=utf-8')
+    if(req.session.username){
+        res.render('succ',{
+            data:JSON.stringify({
+                username:req.session.username
+            })
+        })
+        next()
+    }else{
+        res.render('fail',{
+            data:JSON.stringify({
+                message:'请登录'
+            })
+        })
+    }
+}
+
 module.exports = {
     signup,
     list,
     remove,
     signin,
-    signout
+    signout,
+    isAuth
 }
