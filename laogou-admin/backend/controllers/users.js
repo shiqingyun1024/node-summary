@@ -87,7 +87,7 @@ const signin = async (req, res, next)=>{
 
 // 退出登录
 const signout = async(req,res,next)=>{
-    console.log(12);
+    res.set('content-type', 'application/json;charset=utf-8')
     req.session = null
     res.render('succ', {
         data: JSON.stringify({

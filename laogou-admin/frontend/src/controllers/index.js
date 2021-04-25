@@ -20,7 +20,7 @@ const _handleSubmit = (router) => {
             type: 'post',
             data,
             success(res) {
-                if(res.ret){
+                if (res.ret) {
                     router.go('/index')
                 }
             }
@@ -98,7 +98,7 @@ const _setPageActive = (index) => {
 
 // 初始化数据
 const index = router => {
-    return (req, res, next) => {
+    const loadIndex = (res) => {
         // 渲染首页
         res.render(htmlIndex)
         // 填充用户列表
@@ -143,23 +143,39 @@ const index = router => {
                 _setPageActive(curPage)
             }
         })
-
         // 退出登录
         $("#users-signout").on('click', (e) => {
             e.preventDefault();
-            router.go('/signin')
-        })
+            $.ajax({
+                url: '/api/users/signout',
+                success(result) {
+                    if (result.ret) {
+                        location.reload()
+                    }
+                }
 
+            })
+
+        })
         // 初次渲染list
         _loadData()
-
-
         // 分页
         _pagination(dataList)
-
-
         // 点击保存，提交表单
         $('#users-save').on('click', _signup)
+    }
+    return (req, res, next) => {
+       $.ajax({
+           url:'/api/users/isAuth',
+           dataType:'json',
+           success(result){
+               if(result.ret){
+                loadIndex(res)
+               }else{
+                   router.go('/signin')
+               }
+           }
+       })
     }
 }
 export {
