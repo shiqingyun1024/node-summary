@@ -1,7 +1,8 @@
 import SMERouter from 'sme-router'
 import indexTpl from '../views/index.art'
 import signinTpl from '../views/signin.art'
-import { signin,index } from '../controllers'
+import signin from '../controllers/signin'
+import index from '../controllers/index'
 const htmlIndex = indexTpl({})
 const htmlSignin = signinTpl({})
 // $('#root').html(htmlIndex) 相当于下面的res.render
@@ -12,6 +13,7 @@ router.route('/signin', signin(router))
 
 router.route('/index', index(router))
 
+// 路由守卫
 router.use((req) => {
   // 第一个打开的页面
   $.ajax({

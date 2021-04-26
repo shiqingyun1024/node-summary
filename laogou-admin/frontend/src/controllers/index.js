@@ -8,23 +8,7 @@ const pageSize = 3;
 let curPage = 1;
 let dataList = [];
 
-const _handleSubmit = (router) => {
-    return (e) => {
-        e.preventDefault()
-        // 提交表单
-        const data = $('#signin').serialize()
-        $.ajax({
-            url: '/api/users/signin',
-            type: 'post',
-            data,
-            success(res) {
-                if (res.ret) {
-                    router.go('/index')
-                }
-            }
-        })
-    }
-}
+
 // 提交新增用户
 const _signup = () => {
     // 提交表单
@@ -170,7 +154,4 @@ const index = router => {
        })
     }
 }
-export {
-    signin,
-    index
-}
+export default index
