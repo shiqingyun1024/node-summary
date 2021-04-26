@@ -1632,6 +1632,9 @@ io.on('connection',socket=>{
 - Node.js
 - Express
 - MongoDB（Mongoose）// 驱动程序
+- EJS
+- jwt(json web token)
+- RMVP
 ### 开发架构
 - 前后端分离的开发架构
 

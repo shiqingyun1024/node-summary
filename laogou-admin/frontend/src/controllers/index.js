@@ -1,11 +1,9 @@
 import indexTpl from '../views/index.art'
-import signinTpl from '../views/signin.art'
 import usersTpl from '../views/users.art'
 import usersListTpl from '../views/users-list.art'
 import usersListPageTpl from '../views/users-pages.art'
 import router from '../routes'
 const htmlIndex = indexTpl({})
-const htmlSignin = signinTpl({})
 const pageSize = 3;
 let curPage = 1;
 let dataList = [];
@@ -79,13 +77,7 @@ const _list = (pageNo) => {
     }))
 }
 
-// 登录之后渲染数据
-const signin = router => {
-    return (req, res, next) => {
-        res.render(htmlSignin)
-        $("#signin").on('submit', _handleSubmit(router))
-    }
-}
+
 
 // 设置当前页
 const _setPageActive = (index) => {
