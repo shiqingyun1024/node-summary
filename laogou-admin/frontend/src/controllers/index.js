@@ -61,8 +61,6 @@ const _list = (pageNo) => {
     }))
 }
 
-
-
 // 设置当前页
 const _setPageActive = (index) => {
     $("#users-page #users-page-list li:not(:first-child,:last-child)")
@@ -72,6 +70,54 @@ const _setPageActive = (index) => {
         .removeClass('active')
 }
 
+// 所有的事件方法
+const _methods = () => {
+    // 删除事件绑定
+    $('#users-list').on('click', '.remove', function () {
+        $.ajax({
+            url: '/api/users/',
+            type: 'delete',
+            data: {
+                id: $(this).data('id')
+            },
+            success() {
+                console.log('01');
+                // 初次渲染list
+                _loadData()
+                if (Math.ceil(dataList.length / pageSize) === curPage && dataList.length % pageSize === 1 && curPage > 0) {
+                    curPage--
+                }
+                // 分页
+                _pagination(dataList)
+            }
+        })
+    })
+    // 分页事件绑定
+    $("#users-page").on('click', '#users-page-list li:not(:first-child,:last-child)', function () {
+        const index = $(this).index();
+        _list(index)
+        curPage = index
+        _setPageActive(curPage)
+    })
+    $("#users-page").on('click', '#users-page-list li:first-child', function () {
+        if (curPage > 1) {
+            curPage--
+            _list(curPage)
+            _setPageActive(curPage)
+        }
+    })
+    $("#users-page").on('click', '#users-page-list li:last-child', function () {
+        if (curPage < Math.ceil(dataList.length / pageSize)) {
+            curPage++
+            _list(curPage)
+            _setPageActive(curPage)
+        }
+    })
+    // 点击保存，提交表单
+    $('#users-save').on('click', _signup)
+}
+
+
 // 初始化数据
 const index = router => {
     const loadIndex = (res) => {
@@ -79,46 +125,11 @@ const index = router => {
         res.render(htmlIndex)
         // 填充用户列表
         $('#content').html(usersTpl());
-        $('#users-list').on('click', '.remove', function () {
-            $.ajax({
-                url: '/api/users/',
-                type: 'delete',
-                data: {
-                    id: $(this).data('id')
-                },
-                success() {
-                    console.log('01');
-                    // 初次渲染list
-                    _loadData()
-                    if (Math.ceil(dataList.length / pageSize) === curPage && dataList.length % pageSize === 1 && curPage > 0) {
-                        curPage--
-                    }
-                    // 分页
-                    _pagination(dataList)
-                }
-            })
-        })
-        // 分页事件绑定
-        $("#users-page").on('click', '#users-page-list li:not(:first-child,:last-child)', function () {
-            const index = $(this).index();
-            _list(index)
-            curPage = index
-            _setPageActive(curPage)
-        })
-        $("#users-page").on('click', '#users-page-list li:first-child', function () {
-            if (curPage > 1) {
-                curPage--
-                _list(curPage)
-                _setPageActive(curPage)
-            }
-        })
-        $("#users-page").on('click', '#users-page-list li:last-child', function () {
-            if (curPage < Math.ceil(dataList.length / pageSize)) {
-                curPage++
-                _list(curPage)
-                _setPageActive(curPage)
-            }
-        })
+        // 初次渲染list
+        _loadData()
+        
+        // 页面事件绑定
+        _methods();
         // 退出登录
         $("#users-signout").on('click', (e) => {
             e.preventDefault();
@@ -133,25 +144,22 @@ const index = router => {
             })
 
         })
-        // 初次渲染list
-        _loadData()
+        
         // 分页
         _pagination(dataList)
-        // 点击保存，提交表单
-        $('#users-save').on('click', _signup)
     }
     return (req, res, next) => {
-       $.ajax({
-           url:'/api/users/isAuth',
-           dataType:'json',
-           success(result){
-               if(result.ret){
-                loadIndex(res)
-               }else{
-                   router.go('/signin')
-               }
-           }
-       })
+        $.ajax({
+            url: '/api/users/isAuth',
+            dataType: 'json',
+            success(result) {
+                if (result.ret) {
+                    loadIndex(res)
+                } else {
+                    router.go('/signin')
+                }
+            }
+        })
     }
 }
 export default index

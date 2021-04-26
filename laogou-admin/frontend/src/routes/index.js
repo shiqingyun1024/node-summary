@@ -17,22 +17,20 @@ router.route('/index', index(router))
 router.use((req) => {
   // 第一个打开的页面
   $.ajax({
-    url:'/api/users/isAuth',
-    dataType:'json',
-    success(result){
-      if(result.ret){
+    url: '/api/users/isAuth',
+    dataType: 'json',
+    success(result) {
+      if (result.ret) {
         router.go('/index')
-      }else{
+      } else {
         router.go('/signin')
       }
     }
   })
 })
 
-router.route('/',()=>{})
+router.route('/', () => {})
 
-// router.route('/signin', signin(router))
-
-  export default router
+export default router
 
 // router.go('/user/123?name=hwen', { mes: 'hallo world'})
