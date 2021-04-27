@@ -1,7 +1,9 @@
 import indexTpl from '../views/index.art'
 import usersTpl from '../views/users.art'
 import usersListTpl from '../views/users-list.art'
-import usersListPageTpl from '../views/users-pages.art'
+
+import pagination from '../components/pagination'
+
 import router from '../routes'
 const htmlIndex = indexTpl({})
 const pageSize = 3;
@@ -35,7 +37,7 @@ const _loadData = () => {
         success(result) {
             dataList = result.data;
             // 分页
-            _pagination(result.data)
+            pagination(result.data,pageSize,curPage)
             _list(curPage);
         }
     })
@@ -67,13 +69,20 @@ const _methods = () => {
                     curPage--
                 }
                 // 分页
-                _pagination(dataList)
+                pagination(dataList,pageSize,curPage)
             }
         })
     })
     
     // 点击保存，提交表单
     $('#users-save').on('click', _signup)
+}
+
+// 发布订阅模式===注册
+const _subscribe = ()=>{
+    $.on('changeCurPage',()=>{
+        console.log(0);
+    })
 }
 
 
@@ -105,7 +114,7 @@ const index = router => {
         })
         
         // 分页
-        _pagination(dataList)
+        pagination(dataList,pageSize,curPage)
     }
     return (req, res, next) => {
         $.ajax({
