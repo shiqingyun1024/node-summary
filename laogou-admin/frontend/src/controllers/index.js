@@ -3,6 +3,7 @@ import usersTpl from '../views/users.art'
 import usersListTpl from '../views/users-list.art'
 
 import pagination from '../components/pagination'
+import page from '../databus/page'
 
 import router from '../routes'
 const htmlIndex = indexTpl({})
@@ -80,9 +81,9 @@ const _methods = () => {
 
 // 发布订阅模式===注册
 const _subscribe = ()=>{
-    $('body').on('changeCurPage',(index)=>{
-        console.log(0);
-        console.log(index);
+    $('body').on('changeCurPage',(e,index)=>{
+        _list(index)
+        // console.log(page.curPage);
     })
 }
 
