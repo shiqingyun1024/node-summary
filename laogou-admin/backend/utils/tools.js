@@ -1,4 +1,7 @@
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+const path = require('path');
+const jwt = require('jsonwebtoken');
 
 exports.hash = (myPlaintextPassword)=>{
     return new Promise((resolve,reject)=>{
@@ -25,4 +28,13 @@ exports.compare = (myPlaintextPassword, hash)=>{
             // result == true
         });
     })
+}
+
+exports.sign = () =>{
+    const privateKey = fs.readFileSync(path.join(__dirname,'../keys/rsa_private_key.pem'))
+
+}
+exports.verify = () =>{
+    const publicKey = fs.readFileSync(path.join(__dirname,'../keys/rsa_public_key.pem'))
+
 }
