@@ -1,6 +1,6 @@
 class Page{
     constructor(){
-        this.pageSize = 10
+        this.pageSize = 3
         this.curPage = 1
     }
     setCurPage(curPage){

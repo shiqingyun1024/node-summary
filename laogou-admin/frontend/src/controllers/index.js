@@ -7,12 +7,12 @@ import page from '../databus/page'
 
 import router from '../routes'
 const htmlIndex = indexTpl({})
-const pageSize = 3;
+const pageSize = page.pageSize;
 let curPage = 1;
 let dataList = [];
 
 
-// 提交新增用户
+// 提交新增用户  注册
 const _signup = () => {
     // 提交表单
     const data = $('#users-form').serialize()
@@ -21,6 +21,7 @@ const _signup = () => {
         type: 'post',
         data,
         success(res) {
+            page.setCurPage(1)
             // 添加数据后渲染
             _loadData()
         }
@@ -63,14 +64,16 @@ const _methods = () => {
                 id: $(this).data('id')
             },
             success() {
-                console.log('01');
-                // 初次渲染list
                 _loadData()
-                if (Math.ceil(dataList.length / pageSize) === curPage && dataList.length % pageSize === 1 && curPage > 0) {
-                    curPage--
+                const isLastPage = Math.ceil(dataList.length / pageSize) === page.setCurPage
+                const restOne = dataList.length%pageSize===1
+                const notPageFirst = page.setCurPage > 0
+                // 初次渲染list
+                if ( isLastPage&& restOne && notPageFirst) {
+                    page.setCurPage(page.curPage-1)
                 }
                 // 分页
-                pagination(dataList,pageSize,curPage)
+                pagination(dataList,pageSize)
             }
         })
     })
