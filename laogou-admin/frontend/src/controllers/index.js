@@ -80,8 +80,9 @@ const _methods = () => {
 
 // 发布订阅模式===注册
 const _subscribe = ()=>{
-    $.on('changeCurPage',()=>{
+    $('body').on('changeCurPage',(index)=>{
         console.log(0);
+        console.log(index);
     })
 }
 
@@ -115,6 +116,7 @@ const index = router => {
         
         // 分页
         pagination(dataList,pageSize,curPage)
+        _subscribe()
     }
     return (req, res, next) => {
         $.ajax({
