@@ -20,7 +20,7 @@ const _signup = () => {
         url: '/api/users/',
         type: 'post',
         headers:{
-          'X-Access-Token':localStorage.getItem('lg-token')
+          'X-Access-Token':localStorage.getItem('lg-token') || ""
         },
         data,
         success(res) {
@@ -38,6 +38,9 @@ const _loadData = () => {
     $.ajax({
         url: '/api/users/',
         type: 'get',
+        headers:{
+            'X-Access-Token':localStorage.getItem('lg-token') || ""
+          },
         // async:false,
         success(result) {
             dataList = result.data;
@@ -63,6 +66,9 @@ const _methods = () => {
         $.ajax({
             url: '/api/users/',
             type: 'delete',
+            headers:{
+                'X-Access-Token':localStorage.getItem('lg-token') || ""
+            },
             data: {
                 id: $(this).data('id')
             },
@@ -108,16 +114,22 @@ const index = router => {
         _methods();
         // 退出登录
         $("#users-signout").on('click', (e) => {
+            console.log('退出登录');
             e.preventDefault();
-            $.ajax({
-                url: '/api/users/signout',
-                success(result) {
-                    if (result.ret) {
-                        location.reload()
-                    }
-                }
+            localStorage.setItem('lg-token','')
+            location.reload()
+            // $.ajax({
+            //     url: '/api/users/signout',
+            //     headers:{
+            //         'X-Access-Token':localStorage.getItem('lg-token') || ""
+            //       },
+            //     success(result) {
+            //         if (result.ret) {
+            //             location.reload()
+            //         }
+            //     }
 
-            })
+            // })
 
         })
         
@@ -129,6 +141,9 @@ const index = router => {
         $.ajax({
             url: '/api/users/isAuth',
             dataType: 'json',
+            headers:{
+                'X-Access-Token':localStorage.getItem('lg-token') || ""
+              },
             success(result) {
                 if (result.ret) {
                     loadIndex(res)

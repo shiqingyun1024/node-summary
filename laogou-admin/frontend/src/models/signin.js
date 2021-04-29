@@ -15,6 +15,9 @@ const _handleSubmit = (router) => {
         const data = $('#signin').serialize()
         $.ajax({
             url: '/api/users/signin',
+            // headers:{
+            //     'X-Access-Token':localStorage.getItem('lg-token')
+            // },
             type: 'post',
             data,
             success(res) {
