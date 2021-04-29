@@ -1,5 +1,5 @@
 const usersModel = require('../models/users')
-const {hash,compare} = require('../utils/tools')
+const {hash,compare,sign,verify} = require('../utils/tools')
 const randomstring = require("randomstring");
 // const cookieSession = require('cookie-session')
 
@@ -52,15 +52,24 @@ const signin = async (req, res, next)=>{
         let {password:hash} = result
         let compareResult = await compare(password,hash)
         if(compareResult){
+            // session登录
             // const sessionId = randomstring.generate()
             // res.append('Set-Cookie', `sessionId=${sessionId}; Path=/; HttpOnly`)
 
             // console.log(req.session);
-            req.session.username = username
+            
             // app.use(cookieSession({
             //     name: 'session',
             //     keys: ['key1', 'key2']
             //   }))
+
+            // req.session.username = username
+
+            // token登录
+            const token = sign(username)
+            console.log(token);
+            res.set('X-Access-Token',token)
+
             res.render('succ', {
                 data: JSON.stringify({
                     username

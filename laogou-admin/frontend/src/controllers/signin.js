@@ -9,10 +9,14 @@ const _handleSubmit = (router) => {
             url: '/api/users/signin',
             type: 'post',
             data,
-            success(res) {
-                if (res.ret) {
-                    router.go('/index')
-                }
+            success(res,textStatus,jqXHR) {
+                const responseHeader = jqXHR.getResponseHeader('X-Access-Token')
+                console.log(jqXHR);
+                console.log(responseHeader);
+                console.log(res);
+                // if (res.ret) {
+                //     router.go('/index')
+                // }
             }
         })
     }

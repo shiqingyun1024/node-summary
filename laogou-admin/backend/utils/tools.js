@@ -30,7 +30,7 @@ exports.compare = (myPlaintextPassword, hash)=>{
     })
 }
 
-exports.sign = () =>{
+exports.sign = (username) =>{
     const privateKey = fs.readFileSync(path.join(__dirname,'../keys/rsa_private_key.pem'))
     const token = jwt.sign({username},privateKey,{algorithm:'RS256'})
     return token
