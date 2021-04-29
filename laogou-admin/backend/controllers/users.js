@@ -142,25 +142,20 @@ const remove = async (req, res, next) => {
 const isAuth = async (req,res,next)=>{
     res.set('content-type', 'application/json;charset=utf-8')
     let token = req.get('X-Access-Token')
-    try{
-        let result = verify('token')
+    console.log('123456');
+    console.log(token);
+    let result = verify(token)
         console.log(result);
-    }catch(e){
-        res.render('fail',{
-            data:JSON.stringify({
-                message:'请登录'
-            })
-        })
-    }
-    
-    if(req.session.username){
+    try{
+        let result = verify(token)
+        console.log(result);
         res.render('succ',{
             data:JSON.stringify({
-                username:req.session.username
+                username:result.username
             })
         })
-        next()
-    }else{
+        // next()
+    }catch(e){
         res.render('fail',{
             data:JSON.stringify({
                 message:'请登录'

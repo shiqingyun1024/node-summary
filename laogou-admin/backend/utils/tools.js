@@ -36,7 +36,7 @@ exports.sign = (username) =>{
     return token
 }
 exports.verify = (token) =>{
-    const publicKey = fs.readFileSync(path.join(__dirname,'../keys/rsa_public_key.pem'))
+    const publicKey = fs.readFileSync(path.join(__dirname,'../keys/rsa_public_keys.pem'))
     const result = jwt.verify(token,publicKey)
     return result
 }
