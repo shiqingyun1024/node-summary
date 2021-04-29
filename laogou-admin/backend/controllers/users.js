@@ -141,6 +141,18 @@ const remove = async (req, res, next) => {
 // 权限校验
 const isAuth = async (req,res,next)=>{
     res.set('content-type', 'application/json;charset=utf-8')
+    let token = req.get('X-Access-Token')
+    try{
+        let result = verify('token')
+        console.log(result);
+    }catch(e){
+        res.render('fail',{
+            data:JSON.stringify({
+                message:'请登录'
+            })
+        })
+    }
+    
     if(req.session.username){
         res.render('succ',{
             data:JSON.stringify({

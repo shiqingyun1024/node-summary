@@ -10,9 +10,9 @@ const _handleSubmit = (router) => {
             type: 'post',
             data,
             success(res,textStatus,jqXHR) {
-                const responseHeader = jqXHR.getResponseHeader('X-Access-Token')
+                const token = jqXHR.getResponseHeader('X-Access-Token')
+                localStorage.setItem('lg-token',token)
                 console.log(jqXHR);
-                console.log(responseHeader);
                 console.log(res);
                 // if (res.ret) {
                 //     router.go('/index')

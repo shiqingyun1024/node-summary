@@ -14,20 +14,23 @@ router.route('/signin', signin(router))
 router.route('/index', index(router))
 
 // 路由守卫
-// router.use((req) => {
-//   // 第一个打开的页面
-//   $.ajax({
-//     url: '/api/users/isAuth',
-//     dataType: 'json',
-//     success(result) {
-//       if (result.ret) {
-//         router.go('/index')
-//       } else {
-//         router.go('/signin')
-//       }
-//     }
-//   })
-// })
+router.use((req) => {
+  // 第一个打开的页面
+  $.ajax({
+    url: '/api/users/isAuth',
+    dataType: 'json',
+    headers:{
+      'X-Access-Token':localStorage.getItem('lg-token')||''
+    },
+    success(result) {
+      if (result.ret) {
+        router.go('/index')
+      } else {
+        router.go('/signin')
+      }
+    }
+  })
+})
 
 router.route('/', () => {})
 
