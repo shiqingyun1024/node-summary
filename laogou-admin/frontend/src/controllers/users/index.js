@@ -2,36 +2,14 @@ import indexTpl from '../views/index.art'
 import usersTpl from '../views/users.art'
 import usersListTpl from '../views/users-list.art'
 
-import pagination from '../components/pagination'
-import page from '../databus/page'
+import pagination from '../../components/pagination'
+import page from '../../databus/page'
 
-import router from '../routes'
+import router from '../../routes'
 const htmlIndex = indexTpl({})
 const pageSize = page.pageSize;
 let curPage = 1;
 let dataList = [];
-
-
-// 提交新增用户  注册
-const _signup = () => {
-    // 提交表单
-    const data = $('#users-form').serialize()
-    $.ajax({
-        url: '/api/users/',
-        type: 'post',
-        headers:{
-          'X-Access-Token':localStorage.getItem('lg-token') || ""
-        },
-        data,
-        success(res) {
-            page.setCurPage(1)
-            // 添加数据后渲染
-            _loadData()
-        }
-    })
-    // 关闭模态框
-    $('#users-close').click();
-}
 
 // 请求数据
 const _loadData = () => {
@@ -95,7 +73,9 @@ const _methods = () => {
 const _subscribe = ()=>{
     $('body').on('changeCurPage',(e,index)=>{
         _list(index)
-        // console.log(page.curPage);
+    })
+    $('body').on('addUser',(e,index)=>{
+        _loadData()
     })
 }
 
