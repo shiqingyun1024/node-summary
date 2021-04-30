@@ -86,6 +86,7 @@ const index = router => {
         res.render(htmlIndex)
         // 填充用户列表
         $('#content').html(usersTpl());
+        $('#add-user-btn').on('click',addUser)
         // 初次渲染list
         _loadData()
         

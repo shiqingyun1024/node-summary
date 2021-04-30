@@ -2,7 +2,7 @@ import SMERouter from 'sme-router'
 import indexTpl from '../views/index.art'
 import signinTpl from '../views/signin.art'
 import signin from '../controllers/signin'
-import index from '../controllers/index'
+import index from '../controllers/users/index'
 const htmlIndex = indexTpl({})
 const htmlSignin = signinTpl({})
 // $('#root').html(htmlIndex) 相当于下面的res.render
