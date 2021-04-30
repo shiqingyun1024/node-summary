@@ -5,6 +5,8 @@ import usersListTpl from '../views/users-list.art'
 import pagination from '../../components/pagination'
 import page from '../../databus/page'
 
+import { addUser } from './add-user'
+
 import router from '../../routes'
 const htmlIndex = indexTpl({})
 const pageSize = page.pageSize;
@@ -64,9 +66,6 @@ const _methods = () => {
             }
         })
     })
-    
-    // 点击保存，提交表单
-    $('#users-save').on('click', _signup)
 }
 
 // 发布订阅模式===注册
