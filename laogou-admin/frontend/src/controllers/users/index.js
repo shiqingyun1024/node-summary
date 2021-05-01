@@ -1,6 +1,6 @@
-import indexTpl from '../views/index.art'
-import usersTpl from '../views/users.art'
-import usersListTpl from '../views/users-list.art'
+import indexTpl from '../../views/index.art'
+import usersTpl from '../../views/users.art'
+import usersListTpl from '../../views/users-list.art'
 
 import pagination from '../../components/pagination'
 import page from '../../databus/page'
