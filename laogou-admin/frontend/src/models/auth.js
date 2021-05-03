@@ -1,4 +1,4 @@
-export const routerGuard = () =>{
+export const auth = () =>{
     return $.ajax({
         url:'/api/users/isAuth',
         dataType:'json',

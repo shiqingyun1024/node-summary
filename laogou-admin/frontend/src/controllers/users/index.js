@@ -6,6 +6,9 @@ import pagination from '../../components/pagination'
 import page from '../../databus/page'
 
 import { addUser } from './add-user'
+import { usersList as usersListModel} from '../../models/users-list'
+import { auth as authModel} from '../../models/auth'
+
 
 import router from '../../routes'
 const htmlIndex = indexTpl({})
@@ -14,21 +17,12 @@ let curPage = 1;
 let dataList = [];
 
 // 请求数据
-const _loadData = () => {
-    $.ajax({
-        url: '/api/users/',
-        type: 'get',
-        headers:{
-            'X-Access-Token':localStorage.getItem('lg-token') || ""
-          },
-        // async:false,
-        success(result) {
-            dataList = result.data;
-            // 分页
-            pagination(result.data,pageSize,curPage)
-            _list(curPage);
-        }
-    })
+const _loadData = async () => {
+    let result = await usersListModel()
+    dataList = result.data;
+    // 分页
+    pagination(result.data, pageSize, curPage)
+    _list(curPage);
 }
 
 // 获取列表数据并渲染
@@ -46,8 +40,8 @@ const _methods = () => {
         $.ajax({
             url: '/api/users/',
             type: 'delete',
-            headers:{
-                'X-Access-Token':localStorage.getItem('lg-token') || ""
+            headers: {
+                'X-Access-Token': localStorage.getItem('lg-token') || ""
             },
             data: {
                 id: $(this).data('id')
@@ -55,25 +49,25 @@ const _methods = () => {
             success() {
                 _loadData()
                 const isLastPage = Math.ceil(dataList.length / pageSize) === page.setCurPage
-                const restOne = dataList.length%pageSize===1
+                const restOne = dataList.length % pageSize === 1
                 const notPageFirst = page.setCurPage > 0
                 // 初次渲染list
-                if ( isLastPage&& restOne && notPageFirst) {
-                    page.setCurPage(page.curPage-1)
+                if (isLastPage && restOne && notPageFirst) {
+                    page.setCurPage(page.curPage - 1)
                 }
                 // 分页
-                pagination(dataList,pageSize)
+                pagination(dataList, pageSize)
             }
         })
     })
 }
 
 // 发布订阅模式===注册
-const _subscribe = ()=>{
-    $('body').on('changeCurPage',(e,index)=>{
+const _subscribe = () => {
+    $('body').on('changeCurPage', (e, index) => {
         _list(index)
     })
-    $('body').on('addUser',(e,index)=>{
+    $('body').on('addUser', (e, index) => {
         _loadData()
     })
 }
@@ -86,17 +80,17 @@ const index = router => {
         res.render(htmlIndex)
         // 填充用户列表
         $('#content').html(usersTpl());
-        $('#add-user-btn').on('click',addUser)
+        $('#add-user-btn').on('click', addUser)
         // 初次渲染list
         _loadData()
-        
+
         // 页面事件绑定
         _methods();
         // 退出登录
         $("#users-signout").on('click', (e) => {
             console.log('退出登录');
             e.preventDefault();
-            localStorage.setItem('lg-token','')
+            localStorage.setItem('lg-token', '')
             location.reload()
             // $.ajax({
             //     url: '/api/users/signout',
@@ -112,26 +106,18 @@ const index = router => {
             // })
 
         })
-        
+
         // 分页
-        pagination(dataList,pageSize,curPage)
+        pagination(dataList, pageSize, curPage)
         _subscribe()
     }
-    return (req, res, next) => {
-        $.ajax({
-            url: '/api/users/isAuth',
-            dataType: 'json',
-            headers:{
-                'X-Access-Token':localStorage.getItem('lg-token') || ""
-              },
-            success(result) {
-                if (result.ret) {
-                    loadIndex(res)
-                } else {
-                    router.go('/signin')
-                }
-            }
-        })
+    return async (req, res, next) => {
+        let result = await authModel();
+        if (result.ret) {
+            loadIndex(res)
+        } else {
+            router.go('/signin')
+        }
     }
 }
 export default index
