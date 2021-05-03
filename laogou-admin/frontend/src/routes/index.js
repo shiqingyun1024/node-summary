@@ -3,6 +3,8 @@ import indexTpl from '../views/index.art'
 import signinTpl from '../views/signin.art'
 import signin from '../controllers/signin'
 import index from '../controllers/users/index'
+
+import{routerGuard as rgModel} from '../models/router-guard'
 const htmlIndex = indexTpl({})
 const htmlSignin = signinTpl({})
 // $('#root').html(htmlIndex) 相当于下面的res.render
@@ -14,22 +16,14 @@ router.route('/signin', signin(router))
 router.route('/index', index(router))
 
 // 路由守卫
-router.use((req) => {
+router.use(async (req)=>{
   // 第一个打开的页面
-  $.ajax({
-    url: '/api/users/isAuth',
-    dataType: 'json',
-    headers:{
-      'X-Access-Token':localStorage.getItem('lg-token')||''
-    },
-    success(result) {
-      if (result.ret) {
-        router.go('/index')
-      } else {
-        router.go('/signin')
-      }
-    }
-  })
+  let result = await rgModel()
+  if(result.ret){
+    router.go('/index')
+  }else{
+    router.go('/signin')
+  }
 })
 
 router.route('/', () => {})
