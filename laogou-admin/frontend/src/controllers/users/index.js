@@ -6,8 +6,9 @@ import pagination from '../../components/pagination'
 import page from '../../databus/page'
 
 import { addUser } from './add-user'
-import { usersList as usersListModel} from '../../models/users-list'
-import { auth as authModel} from '../../models/auth'
+import { usersList as usersListModel } from '../../models/users-list'
+import { auth as authModel } from '../../models/auth'
+import { usersRemove as usersRemoveModel } from '../../models/users-remove'
 
 
 import router from '../../routes'
@@ -36,29 +37,20 @@ const _list = (pageNo) => {
 // 所有的事件方法
 const _methods = () => {
     // 删除事件绑定
-    $('#users-list').on('click', '.remove', function () {
-        $.ajax({
-            url: '/api/users/',
-            type: 'delete',
-            headers: {
-                'X-Access-Token': localStorage.getItem('lg-token') || ""
-            },
-            data: {
-                id: $(this).data('id')
-            },
-            success() {
-                _loadData()
-                const isLastPage = Math.ceil(dataList.length / pageSize) === page.setCurPage
-                const restOne = dataList.length % pageSize === 1
-                const notPageFirst = page.setCurPage > 0
-                // 初次渲染list
-                if (isLastPage && restOne && notPageFirst) {
-                    page.setCurPage(page.curPage - 1)
-                }
-                // 分页
-                pagination(dataList, pageSize)
+    $('#users-list').on('click', '.remove', async function () {
+        let result = await usersRemoveModel($(this).data('id'))
+        if(result.ret){
+            _loadData()
+            const isLastPage = Math.ceil(dataList.length / pageSize) === page.setCurPage
+            const restOne = dataList.length % pageSize === 1
+            const notPageFirst = page.setCurPage > 0
+            // 初次渲染list
+            if (isLastPage && restOne && notPageFirst) {
+                page.setCurPage(page.curPage - 1)
             }
-        })
+            // 分页
+            pagination(dataList, pageSize)
+        }
     })
 }
 
