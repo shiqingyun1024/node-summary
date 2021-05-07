@@ -1,13 +1,9 @@
-export const usersList = () =>{
-    return $.ajax({
-        url: '/api/users/',
-        type: 'get',
-        headers:{
-            'X-Access-Token':localStorage.getItem('lg-token') || ""
-          },
-        // async:false,
-        success(result) {
-            return result
-        }
-    })
+import http from '../utils/http'
+export const usersList = async () =>{
+    try{
+        let {result} = await http({url:'/api/users/'})
+        return result
+    }catch(err){
+        console.log(err);
+    }
 }
