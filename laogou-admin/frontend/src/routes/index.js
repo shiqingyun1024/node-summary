@@ -2,7 +2,7 @@ import SMERouter from 'sme-router'
 import indexTpl from '../views/index.art'
 import signinTpl from '../views/signin.art'
 import signin from '../controllers/signin'
-import index from '../controllers/users/index'
+import index from '../controllers/users/list-user'
 
 import{auth as authModel} from '../models/auth'
 const htmlIndex = indexTpl({})
