@@ -1,4 +1,3 @@
-import indexTpl from '../../views/index.art'
 import usersTpl from '../../views/users.art'
 import usersListTpl from '../../views/users-list.art'
 
@@ -12,7 +11,6 @@ import { usersRemove as usersRemoveModel } from '../../models/users-remove'
 
 
 import router from '../../routes'
-const htmlIndex = indexTpl({})
 const pageSize = page.pageSize;
 let curPage = 1;
 let dataList = [];
@@ -63,53 +61,3 @@ const _subscribe = () => {
         _loadData()
     })
 }
-
-
-// 初始化数据
-const index = router => {
-    const loadIndex = (res) => {
-        // 渲染首页
-        res.render(htmlIndex)
-        // 填充用户列表
-        $('#content').html(usersTpl());
-        $('#add-user-btn').on('click', addUser)
-        // 初次渲染list
-        _loadData()
-
-        // 页面事件绑定
-        _methods();
-        // 退出登录
-        $("#users-signout").on('click', (e) => {
-            console.log('退出登录');
-            e.preventDefault();
-            localStorage.setItem('lg-token', '')
-            location.reload()
-            // $.ajax({
-            //     url: '/api/users/signout',
-            //     headers:{
-            //         'X-Access-Token':localStorage.getItem('lg-token') || ""
-            //       },
-            //     success(result) {
-            //         if (result.ret) {
-            //             location.reload()
-            //         }
-            //     }
-
-            // })
-
-        })
-
-        // 分页
-        pagination(dataList, pageSize, curPage)
-        _subscribe()
-    }
-    return async (req, res, next) => {
-        let result = await authModel();
-        if (result.ret) {
-            loadIndex(res)
-        } else {
-            router.go('/signin')
-        }
-    }
-}
-export default index
