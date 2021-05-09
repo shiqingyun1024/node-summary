@@ -4,6 +4,7 @@ import signinTpl from '../views/signin.art'
 import signin from '../controllers/signin'
 // import index from '../controllers/users/list-user'
 import index from '../controllers/index'
+import listUser from '../controllers/users/list-user'
 
 import{auth as authModel} from '../models/auth'
 const htmlIndex = indexTpl({})
@@ -15,6 +16,7 @@ const router = new SMERouter('root')
 router.route('/signin', signin(router))
 
 router.route('/index', index(router))
+router.route('/index/users', listUser(router))
 
 // 路由守卫
 router.use(async (req)=>{
