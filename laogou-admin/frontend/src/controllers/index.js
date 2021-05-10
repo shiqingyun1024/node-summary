@@ -11,7 +11,8 @@ const index = router => {
             // 渲染首页
             next(html)
             $('#sidebar-menu li:not(:first-child)').on('click',()=>{
-                
+                const url = $(this).attr('to')
+                router.go(url)
             })
             // res.render()
         } else {

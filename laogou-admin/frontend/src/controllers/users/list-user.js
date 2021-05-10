@@ -61,3 +61,28 @@ const _subscribe = () => {
         _loadData()
     })
 }
+
+const index=(router)=>{
+    const loadIndex=(res,next)=>{
+        next()
+        res.render(usersTpl())
+        $("#add-user-btn").on('click',addUser)
+        // 初次渲染list
+        _loadData()
+        // 页面事件绑定
+        _methods()
+        // 订阅事件
+        _subscribe()
+    }
+
+    return async(req,res,next)=>{
+        let result = await authModel()
+        if(result.ret){
+            loadIndex(res,next)
+        }else{
+            router.go('/')
+        }
+    }
+}
+
+export default index
