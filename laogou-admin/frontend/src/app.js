@@ -1,4 +1,6 @@
 import './assets/common.css'
 import router from './routes'
 
-router.go('/')
+const hash = location.hash.slice(1)
+
+router.go(hash)
