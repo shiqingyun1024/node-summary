@@ -10,13 +10,13 @@ const index = router => {
             })
             // 渲染首页
             next(html)
-            const $lis = $('#sidebar-menu li:not(:first-child)')
-            $lis.on('click',()=>{
-                const url = $(this).attr('to')
-                router.go(url)
-            })
+            const $lis = $('#sidebar-menu li:not(:first-child) a')
+            // $lis.on('click',()=>{
+            //     const url = $(this).attr('to')
+            //     router.go(url)
+            // })
             let hash = location.hash.slice(1)
-            $lis.find([`to="${hash}"`]).addClass('active').siblings().removeClass('active')
+            $lis.filter(`[href="${hash}"]`).parent().addClass('active').siblings().removeClass('active')
             // res.render()
         } else {
             router.go('/signin')
