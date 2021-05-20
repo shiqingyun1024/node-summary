@@ -117,11 +117,19 @@ cat package.json
 #### 2.5 安装指定版本的包
 ```
 pwd
+// 查看所有安装的包
 npm list
+// 查看underscore最新的版本
 npm info underscore
+// 查看underscore最新的版本同 npm info underscore
 npm view underscore version
+// 查看underscore所有的版本
+npm view underscore versions
+// 安装underscore
 npm install underscore@1.8.0
+// 查看underscore最新的版本
 npm list
+// 卸载underscore
 npm uninstall underscore
 npm list
 <!-- 只装生产环境的包 -->
@@ -129,8 +137,9 @@ npm i --production
 ```
 #### 2.6 更新本地安装的包
 ```
+<!-- 查看underscore的最新的版本 -->
 npm info underscore
-<!-- 查看所有的版本 -->
+<!-- 查看underscore的所有的版本 -->
 npm view underscore versions
 npm install underscore@1.4.4 --save-dev
 npm list | grep gulp
