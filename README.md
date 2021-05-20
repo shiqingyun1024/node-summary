@@ -127,7 +127,11 @@ npm view underscore version
 npm view underscore versions
 // 安装underscore
 npm install underscore@1.8.0
-// 查看underscore最新的版本
+// 查看underscore包的版本信息
+npm ls underscore
+// 查看全局中underscore包的版本信息
+npm ls underscore -g
+// 查看所有安装的包
 npm list
 // 卸载underscore
 npm uninstall underscore
