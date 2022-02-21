@@ -59,6 +59,33 @@ http.createServer((req,res)=>{
     res.end();
 }).listen(3000)
 ```
+### 2.5 获取文件路径（path）
+```
+//把一个路径或路径片段的序列解析为一个绝对路径
+path.resolve(__dirname,'dist')
+path.resolve() 方法会把一个路径或路径片段的序列解析为一个绝对路径。
+给定的路径的序列是从右往左被处理的，后面每个 path 被依次解析，直到构造完成一个绝对路径。 **记住，是从右到左**
+例如，给定的路径片段的序列为：/foo、/bar、baz，则调用 path.resolve('/foo', '/bar', 'baz') 会返回 /bar/baz。
+
+官方例子：
+path.resolve('/foo/bar', './baz');
+// 返回: '/foo/bar/baz'
+
+path.resolve('/foo/bar', '/tmp/file/');
+// 返回: '/tmp/file'
+
+path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif');
+// 如果当前工作目录为 /home/myself/node，
+// 则返回 '/home/myself/node/wwwroot/static_files/gif/image.gif'
+我之前的理解是像拼接字符串一样从右到左将参数拼成一个绝对路径，但是给出的每一个例子都完全不符合这个理解，
+然后看了一篇文章（https://blog.csdn.net/kikyou_csdn/article/details/83150538），感觉作者说的很有道理，
+
+path.resolve([…paths])里的每个参数都类似在当前目录执行一个cd操作，从左到右执行，返回的是最后的当前目录。**重要！！！**
+（很有道理，这种方法很值得借鉴）
+
+
+```
+
 ## 二、Node相关工具
 ### 1、NVM：Node Version Manger
 #### 1.1 Mac安装nvm
