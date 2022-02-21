@@ -83,7 +83,20 @@ path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif');
 path.resolve([…paths])里的每个参数都类似在当前目录执行一个cd操作，从左到右执行，返回的是最后的当前目录。**重要！！！**
 （很有道理，这种方法很值得借鉴）
 
+这样理解才和文档中的例子对上号，例如：
+path.resolve('/foo/bar','./baz');相当于：
+cd /foo/bar //此时当前路径为 /foo/bar
+cd ./baz //此时路径为 /foo/bar/baz
 
+path.resolve('/foo/bar', '/tmp/file/');相当于：
+cd /foo/bar //此时路径为 /foo/bar
+cd /tmp/file/ //此时路径为 /tmp/file
+
+path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif');// 如果当前工作目录为 /home/myself/node，相当于：
+cd wwwroot //此时路径为/home/myself/node/wwwroot
+cd static_files/png/ //此时路径为/home/myself/node/wwwroot/static_files/png/
+cd ../gif/image.gif // 此时路径为/home/myself/node/wwwroot/static_files/gif/image.gif
+综上所述：这样理解，就很容易记住了。
 ```
 
 ## 二、Node相关工具
