@@ -7,7 +7,9 @@ const url = require('url')
 // 创建服务对象
 const server = http.createServer((request, response) => {
     // 2、解析request.url
-    console.log(request.url)
+    // console.log(request.url)
+    let res = url.parse(request.url);
+    console.log(res);
     response.end('url');
 })
 
