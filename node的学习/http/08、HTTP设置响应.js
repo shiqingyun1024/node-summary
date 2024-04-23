@@ -1,21 +1,24 @@
-// 1、导入http模块
+// 导入http模块
 const http = require('http')
 
-// 2、创建服务对象
+// 创建服务对象
 const server = http.createServer((request, response) => {
-    // 获取请求的方法
-    // let method = request.method
-    let { method } = request; // 使用解构赋值
-    // 获取请求的url路径
-    let { pathname } = new URL(request.url, 'http://127.0.0.1')
-    response.setHeader('content-type', 'text/html;charset=utf-8')
-    if (method === 'GET' && pathname === '/login') {
-        response.end('登录页面');
-    } else if (method === 'GET' && pathname === '/reg') {
-        response.end('注册页面');
-    } else {
-        response.end('Not Found');
-    }
+    // 1、设置响应状态码
+    // response.statusCode = 203;
+    // response.statusCode = 404;
+    // 2、响应状态的描述  用得很少
+    // response.statusMessage = 'I love you';
+    // 3、响应头
+    // response.setHeader('content-type', 'text/html;charset=utf-8')
+    // response.setHeader('Server', 'Node.js');
+    // response.setHeader('myHeader', 'test test test');
+    // response.setHeader('test', ['a', 'b', 'c']); // 设置多个响应头test
+    // 4、响应体的设置
+    response.write('love');
+    response.write('love');
+    response.write('love');
+    response.write('love');
+    response.end() // 有且只能有一个response.end
 })
 
 // 3、监听端口，启动服务
