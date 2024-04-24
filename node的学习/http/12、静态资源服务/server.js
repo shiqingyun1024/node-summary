@@ -10,25 +10,14 @@ const server = http.createServer((request, response) => {
     let filePath = __dirname + '/page' + pathname;
     // 读取文件fs异步API
     fs.readFile(filePath, (error, data) => {
-
+        if (error) {
+            response.statusCode = 500
+            response.end('文件读取失败~~')
+            return;
+        }
+        // 响应文件内容
+        response.end(data)
     })
-    if (pathname === '/') {
-        // 读取文件内容
-        let html = fs.readFileSync(__dirname + '/10、table.html')
-        response.end(html);// 有且只能有一个response.end
-    } else if (pathname === '/index.css') {
-        // 读取文件内容
-        let css = fs.readFileSync(__dirname + '/index.css')
-        response.end(css);// 有且只能有一个response.end
-    } else if (pathname === '/index.js') {
-        // 读取文件内容
-        let js = fs.readFileSync(__dirname + '/index.js')
-        response.end(js);// 有且只能有一个response.end
-    } else {
-        response.statusCode = 404
-        response.end('<h1>Not Found</h1>');
-    }
-
 })
 
 // 3、监听端口，启动服务
