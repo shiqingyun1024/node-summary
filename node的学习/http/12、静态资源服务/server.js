@@ -6,6 +6,8 @@ const fs = require('fs')
 const server = http.createServer((request, response) => {
     // 获取请求url的路径
     let { pathname } = new URL(request.url, 'http://127.0.0.1')
+    console.log(pathname)
+    // 直接访问 http://127.0.0.1:9000/js/index.js  下面的拼接会自动加上page变成http://127.0.0.1:9000/page/js/index.js
     // 拼接文件路径
     let filePath = __dirname + '/page' + pathname;
     // 读取文件fs异步API
