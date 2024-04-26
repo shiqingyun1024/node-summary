@@ -25,8 +25,14 @@ const server = http.createServer((request, response) => {
     let ext = path.extname(filePath).slice(1)
     let type = mimes[ext]
     if (type) {
-        // 匹配到了
-        response.setHeader('content-type', type)
+        if (ext === 'html') {
+            // 匹配到了                         text/html;charset=utf-8
+            response.setHeader('content-type', type + ';charset=utf-8')
+        } else {
+            // 匹配到了         浏览器请求回来的css\js等文件会根据网页（也就是html来自动设置一样的charset，所以没必要加了，只给html加上就好了）
+            response.setHeader('content-type')
+        }
+
     } else {
         // 没有匹配到
         response.setHeader('content-type', 'application/octet-stream')
