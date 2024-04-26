@@ -1,6 +1,18 @@
 // 导入http模块
 const http = require('http')
 const fs = require('fs')
+const path = require('path')
+const mimes = {
+    html: 'text/html',
+    css: 'text/css',
+    js: 'text/javascript',
+    png: 'image/png',
+    jpg: 'image/jpeg',
+    gif: 'image/gif',
+    mp4: 'video/mp4',
+    mp3: 'audio/mpeg',
+    json: 'application/json'
+}
 
 // 创建服务对象
 const server = http.createServer((request, response) => {
@@ -10,6 +22,15 @@ const server = http.createServer((request, response) => {
     // 直接访问 http://127.0.0.1:9000/js/index.js  下面的拼接会自动加上page变成http://127.0.0.1:9000/page/js/index.js
     // 拼接文件路径
     let filePath = __dirname + '/page' + pathname;
+    let ext = path.extname(filePath).slice(1)
+    let type = mimes[ext]
+    if (type) {
+        // 匹配到了
+        response.setHeader('content-type', type)
+    } else {
+        // 没有匹配到
+        response.setHeader('content-type', 'application/octet-stream')
+    }
     // 读取文件fs异步API
     fs.readFile(filePath, (error, data) => {
         if (error) {
