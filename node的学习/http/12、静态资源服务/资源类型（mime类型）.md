@@ -18,3 +18,4 @@ mp4:'video/mp4',
 mp3:'audio/mpeg',
 json:'application/json'
 ```
+注意：对于未知的资源类型，可以选择application/octet-stream类型，浏览器在遇到该类型的响应时，会对响应体内容进行独立存储，也就是我们常见的下载效果。
