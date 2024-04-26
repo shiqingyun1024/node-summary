@@ -1,0 +1,70 @@
+<!-- <div class="container">
+    <img src="loading.gif" data-src="pic.png">
+    <img src="loading.gif" data-src="pic.png">
+    <img src="loading.gif" data-src="pic.png">
+    <img src="loading.gif" data-src="pic.png">
+    <img src="loading.gif" data-src="pic.png">
+    <img src="loading.gif" data-src="pic.png">
+</div>
+<script>
+    var imqs = document.querySelectorAll('img');
+    function lazyLoad() {
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        var winHeight = window.innerHeight;
+        for (var i = 0; i < imgs.length; i++) {
+            if (imgs[i].offsetTop < scrollTop + winHeight) {
+                imgs[i].src = imgs[i].getAttribute('data-src')
+            }
+        }
+    }
+    window.onscroll = lazyLoad();
+</script> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 防抖函数  在一定时间内，如果连续触发这个事件，每次都会重新计算时间
+        function fangdou(func, delay) {
+            let timer = null;
+            return function () {
+                if (timer != null) clearTimeout(timer)
+                timer = setTimeout(() => {
+                    func.apply(this, arguments)
+                }, delay)
+            }
+        }
+        function log(value) {
+            console.log(value) // 执行了防抖函数
+        }
+        let fangdou2 = new fangdou(log, 1000)
+        fangdou2('执行了防抖函数') // 执行了防抖函数
+
+        // 节流函数 在一定时间内，如果连续触发这个事件，只会执行一次，且等这个执行完之后才会再真正触发执行
+        function jieliu(func, await) {
+            let run = false
+            return function () {
+                if (run) return;
+                run = true
+                setTimeout(() => {
+                    run = false
+                    func.apply(this, arguments)
+                }, await)
+            }
+        }
+        function log2(value) {
+            console.log(value) // 执行了节流函数
+        }
+        let jieliu2 = new jieliu(log2, 1000)
+        jieliu2('执行了节流函数') // 执行了节流函数        
+    </script>
+</body>
+
+</html>
