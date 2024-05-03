@@ -9,14 +9,17 @@ app.get('/home', (req, res) => {
     res.end('hello world')
 })
 
+// 匹配get方法
 app.get('/', (req, res) => {
     res.end('初次进入页面')
 })
 
+// 匹配post方法
 app.post('/login', (req, res) => { // 地址输入都是get请求，post请求需要发送ajax或者form表单
     res.end('进入登录页面~')
 })
 
+// 匹配所有的方法
 app.all('/test', (req, res) => {
     res.end('test~,test~')
 })
