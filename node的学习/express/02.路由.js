@@ -17,6 +17,10 @@ app.post('/login', (req, res) => { // 地址输入都是get请求，post请求�
     res.end('进入登录页面~')
 })
 
+app.all('/test', (req, res) => {
+    res.end('test~,test~')
+})
+
 // 监听端口号
 app.listen(3000, () => { // 注意这里的3000一定要用数字
     console.log("服务启动了，去访问吧")
