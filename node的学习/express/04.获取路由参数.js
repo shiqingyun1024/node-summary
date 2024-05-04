@@ -1,11 +1,11 @@
-// 1、导入express
+// 导入express
 const express = require('express')
 
-// 2、创建应用对象
+// 创建应用对象
 const app = express();
 
-// 3、创建路由
-app.get('/home', (req, res) => {
+// 创建路由
+app.get('/:id.html', (req, res) => {
     res.end('hello world')
 })
 
