@@ -6,7 +6,11 @@ const app = express();
 
 // 创建路由
 app.get('/:id.html', (req, res) => {
-    res.end('hello world')
+    // 获取URL路由参数
+    console.log(req.params.id)
+
+    res.set('content-type', 'text/html;charset=utf-8')
+    res.end('商品详情')
 })
 
 // 监听端口号
