@@ -13,12 +13,12 @@ let checkCodeMiddleware = (req, res, next) => {
         res.send('暗号错误')
     }
 }
-// 创建路由
+// 创建路由  把路由中间件放在需要的设置中间件规则的路由后面
 app.get('/home', checkCodeMiddleware, (req, res) => {
     res.send('前台首页')
 })
 
-// 把路由中间件放在路由后面，执行的时候先执行中间件里面的内容
+// 把路由中间件放在路由后面，执行的时候先执行中间件里面的内容  
 app.get('/admin', checkCodeMiddleware, (req, res) => {
     // 判断URL 中 是否 code参数等于521
     if (req.query.code === '521') {
