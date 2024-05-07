@@ -4,11 +4,22 @@ const express = require('express')
 // 创建应用对象
 const app = express();
 
+// 声明路由中间件
+let checkCodeMiddleware = (req, res, next) => {
+    // 判断URL 中 是否 code参数等于521
+    if (req.query.code === '521') {
+        next()
+    } else {
+        res.send('暗号错误')
+    }
+}
 // 创建路由
-app.get('/home', (req, res) => {
+app.get('/home', checkCodeMiddleware, (req, res) => {
     res.send('前台首页')
 })
-app.get('/admin', (req, res) => {
+
+// 把路由中间件放在路由后面，执行的时候先执行中间件里面的内容
+app.get('/admin', checkCodeMiddleware, (req, res) => {
     // 判断URL 中 是否 code参数等于521
     if (req.query.code === '521') {
         res.send('后台首页')
