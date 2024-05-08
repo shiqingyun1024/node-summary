@@ -15,6 +15,7 @@ app.use((req, res, next) => {
         let url = new URL(referer);
         // 获取hostname
         let hostname = url.hostname;
+        console.log(hostname)
         // 判断
         if (hostname != '127.0.0.1') {
             // 响应404
