@@ -14,14 +14,19 @@ router.get('/portrait', (req, res) => {
 
 // 处理文件上传
 router.post('/portrait', (req, res) => {
+  // 创建form对象
   const form = formidable({});
 
+  // 解析请求报文
   form.parse(req, (err, fields, files) => {
     if (err) {
       next(err);
       return;
     }
-    res.json({ fields, files });
+    console.log(fields);
+    console.log(files);
+    res.send('OK')
+    // res.json({ fields, files });
   });
 })
 
