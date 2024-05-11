@@ -23,8 +23,8 @@ router.post('/portrait', (req, res) => {
       next(err);
       return;
     }
-    console.log(fields);
-    console.log(files);
+    console.log(fields); // text radio checkbox select
+    console.log(files); // file
     res.send('OK')
     // res.json({ fields, files });
   });

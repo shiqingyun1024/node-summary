@@ -16,7 +16,7 @@ app.get('/home', (req, res) => {
     // res.render('模板的文件名','数据')
     let title = '我是做大事的人'
     res.render('home', { title })
-    // 4、创建模板文件
+    // 4
 })
 
 // 监听端口，启动服务
