@@ -6,14 +6,22 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/bilibili');
 
 //4.设置回调
+// 设置连接成功的回调
 mongoose.connection.on('open', () => {
     console.log('连接成功')
-}); // 设置连接成功的回调
+});
 
+// 设置连接错误的回调
 mongoose.connection.on('error', () => {
     console.log('连接失败');
-})// 设置连接错误的回调
+})
 
+// 设置连接关闭的回调
 mongoose.connection.on('close', () => {
     console.log('连接关闭');
-})// 设置连接关闭的回调
+})
+
+// 关闭mongoose的链接
+// setTimeout(() => {
+//     mongoose.disconnect();
+// }, 2000)
